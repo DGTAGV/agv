@@ -1,0 +1,615 @@
+ <!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGV CHEAT SHEET</title>
+    <style>
+      
+    :root { 
+        --primary: #00b894; --secondary: #f39c12; --success: #2ecc71; 
+        --bg: #f0f2f5; --card-bg: white; --text-color: #333; --border: #eee; --result-bg: #fafafa;
+    }
+
+    
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --bg: #1a1a1a; --card-bg: #2d2d2d; --text-color: #f0f0f0; --border: #444; --result-bg: #383838;
+        }
+    }
+
+   
+    html, body { height: 100%; margin: 0; padding: 0; }
+    
+    body { 
+        font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif; 
+        background: var(--bg); 
+        display: flex; 
+        justify-content: center; 
+        color: var(--text-color); 
+        transition: 0.3s; 
+    }
+    
+
+    .app-card { 
+        width: 100%; 
+        max-width: 480px; 
+        min-height: 100vh; 
+        background: var(--card-bg); 
+        box-shadow: 0 0 20px rgba(0,0,0,0.1); 
+        overflow-y: auto; 
+        display: flex;       
+        flex-direction: column; 
+        border-radius: 0; 
+        transition: 0.3s; 
+    }
+    
+    .header { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white; padding: 40px 20px 30px; position: relative; flex-shrink: 0; }
+    
+    .lang-switch { position: absolute; top: 15px; right: 15px; display: flex; gap: 5px; }
+    .lang-btn { border: 1px solid rgba(255,255,255,0.5); background: rgba(255,255,255,0.2); color: white; padding: 5px 10px; border-radius: 15px; font-size: 0.8rem; cursor: pointer; backdrop-filter: blur(5px); transition: 0.3s; }
+    .lang-btn.active { background: white; color: #00b894; border: none; font-weight: bold; }
+
+    
+    .content { padding: 30px 20px; flex: 1; display: flex; flex-direction: column; }
+    
+    .input-group { position: relative; margin-bottom: 20px; }
+    input { width: 100%; padding: 15px 20px; border: 2px solid var(--border); border-radius: 15px; font-size: 1.1rem; box-sizing: border-box; outline: none; transition: 0.3s; background: var(--card-bg); color: var(--text-color); }
+    input:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(0, 184, 148, 0.2); }
+    
+    
+    .ad-banner {
+        width: 100%;
+        height: 80px; 
+        background-color: var(--border);
+        border-radius: 10px;
+        margin-bottom: 20px; 
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #999;
+        font-size: 0.9rem;
+        border: 2px dashed #ccc; 
+    }
+
+
+    .search-btn { 
+        width: 100%; 
+        padding: 25px 0; 
+        background: linear-gradient(to bottom, #2ecc71, #1e8449); 
+        color: white; 
+        border: none; 
+        border-radius: 15px; 
+        font-size: 1.5rem; 
+        font-weight: 900; 
+        cursor: pointer; 
+        box-shadow: 0 8px 0 #145a32, 0 15px 20px rgba(0,0,0,0.2); 
+        transition: all 0.1s; 
+        margin-bottom: 10px;
+        position: relative;
+        top: 0;
+        flex-shrink: 0;
+    }
+    .search-btn:active { 
+        top: 8px; 
+        box-shadow: 0 0 0 #145a32, inset 0 2px 5px rgba(0,0,0,0.2); 
+    }
+    
+    #result { margin-top: 25px; padding: 20px; border-radius: 15px; background: var(--result-bg); border-left: 5px solid var(--primary); min-height: 80px; text-align: left; line-height: 1.6; font-size: 1rem; animation: fadeIn 0.5s ease; color: var(--text-color); }
+    
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .footer { padding: 30px 20px; font-size: 0.85rem; color: #888; border-top: 1px solid var(--border); text-align: center; margin-top: auto; flex-shrink: 0; }
+    .footer a { color: var(--primary); text-decoration: none; font-weight: bold; margin-top: 5px; display: inline-block; }
+    
+    .lotto-row { 
+        margin-bottom: 5px; 
+        padding: 5px;      
+        background: var(--card-bg); 
+        border-radius: 8px; 
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1); 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        flex-wrap: wrap; 
+        gap: 3px; 
+    }
+    
+    .lotto-ball { 
+        width: 33px; height: 33px; 
+        border-radius: 50%; 
+        display: inline-flex; justify-content: center; align-items: center; 
+        color: white; font-weight: bold; font-size: 1.2rem; 
+        text-shadow: 1px 1px 1px rgba(0,0,0,0.5); 
+        box-shadow: inset 3px 3px 5px rgba(255,255,255,0.4), inset -3px -3px 5px rgba(0,0,0,0.3), 1px 1px 2px rgba(0,0,0,0.2);
+        border: 1px solid rgba(0,0,0,0.1); 
+    }
+    
+    .plus-sign { font-weight: bold; color: #999; margin: 0 2px; font-size: 1rem; }
+    </style>
+</head>
+<body>
+
+<div class="app-card">
+    <div class="header">
+        <div class="lang-switch">
+            <button id="btn-ko" class="lang-btn active" onclick="setLang('ko')">🇰🇷 KO</button>
+            <button id="btn-en" class="lang-btn" onclick="setLang('en')">🇺🇸 EN</button>
+        </div>
+        <h2 id="title" style="margin:0; font-size: 1.5rem;">AGV 알람 코드 조회</h2>
+        <p id="subtitle" style="margin:5px 0 0; opacity: 0.8; font-size: 0.9rem;">Smart Port Maintenance Assistant</p>
+    </div>
+
+<div class="content">
+        <div class="input-group">
+            <input type="number" id="errorCode" placeholder="코드 3자리 입력" onkeypress="if(event.keyCode==13) check()">
+        </div>
+
+        <div class="ad-banner" id="ad-space">
+            📢 광고 배너 영역
+        </div>
+
+        <button class="search-btn" onclick="check()" id="search-text">조회하기</button>
+        
+        <div id="result">💡 코드를 입력하고 조회 버튼을 누르세요.</div>
+    </div>
+
+    <div class="footer">
+        <span id="footer-text">오류 및 건의사항 문의</span><br>
+        <a href="mailto:TOKIABUJI@NAVER.COM">📧 TOKIABUJI@NAVER.COM</a>
+    </div>
+</div>
+
+<script>
+    let currentLang = 'ko';
+
+    const uiText = {
+        ko: { 
+            title: "AGV 알람 코드 조회", search: "조회하기", placeholder: "코드 1~3자리 입력", 
+            footer: "오류 및 건의사항 문의", empty: "💡 코드를 입력해 주세요.", 
+            unknown: "❌ 해당 코드를 찾을 수 없으니 다시 확인해 주세요.", 
+            lottoTitle: "🎰 <b>행운의 로또 번호</b><br>" 
+        },
+        en: { 
+            title: "AGV CHEAT SHEET", search: "SEARCH", placeholder: "Enter 1~3-digit Code", 
+            footer: "Errors & Suggestions", empty: "💡 Please enter a code.", 
+            unknown: "❌ Code not found. Please check and try again.", 
+            lottoTitle: "🎰 <b>Euro Lucky Numbers</b><br>" 
+        }
+    };
+
+    const agvData = {
+        "1": { ko: "⚠️ <b>오류: 그리스 윤활 전원 공급 장치 VCU 출력 오류</b><br>✅ 조치: VCU에서 모듈로 연결되는 배선을 점검하고 시스템에 결함이나 손상이 있는지 확인하십시오. 모든 것이 정상이면 AGV를 재시작하고 반복되는 오류가 있는지 확인하십시오.", en: "⚠️ <b>Error: Grease lubrication power supply VCU output error</b><br>✅ Action: There is a diagnostics fault on the control of the power supply of the automatic grease lubriction system. Check the wiring from VCU to the module and check the system for faults or damage. If everything is OK, restart the AGV and check for recurring errors." },
+        "3": { ko: "⚠️ <b>오류: E-캐비닛 도어 열림</b><br>✅ 조치: 하나 이상의 E-캐비닛 도어가 열려 있습니다.", en: "⚠️ <b>Error: Door e-cabinet open</b><br>✅ Action: One or more e-cabinet doors are opened." },
+        "5": { ko: "⚠️ <b>오류: 트랙션 냉각수 레벨 너무 낮음</b><br>✅ 조치: 적절한 냉각수로 탱크를 최대 수위까지 보충하십시오.", en: "⚠️ <b>Error: Traction coolant level too low</b><br>✅ Action: The coolant level of the expansion tank for cooling the traction system is too low. Top up the tank to maximum level with suitable coolant." },
+        "18": { ko: "⚠️ <b>오류: 유압 오일 레벨 낮음</b><br>✅ 조치: 유압 오일 레벨이 낮습니다. 유압 시스템의 누유 여부를 점검하십시오. 적절한 유압 오일로 탱크를 최대 수위까지 보충하십시오.", en: "⚠️ <b>Error: Hydraulic oil level low</b><br>✅ Action: The hydraulic oil level is low. Check the hydraulic system for leaks. Top up the tank to maximum level with suitable hydraulic oil." },
+        "19": { ko: "⚠️ <b>오류: 유압 오일 압력 낮음</b><br>✅ 조치: 유압 시스템 압력이 너무 낮습니다. 펌프 및 인버터 기능, 누유, 어큐뮬레이터 질소 압력, 결함 있는 센서 및 밸브를 점검하십시오.", en: "⚠️ <b>Error: Hydraulic oil pressure low</b><br>✅ Action: Hydraulic system pressure is too low. Check the system for: functionality of the pump and inverter, leaks, accumulator nitrogen pressure, faulty sensors and valves." },
+        "23": { ko: "⚠️ <b>오류: 유압 오일 레벨 너무 높음</b><br>✅ 조치: 최대 수위까지 오일을 비우십시오.", en: "⚠️ <b>Error: Hydraulic oil level too high</b><br>✅ Action: The hydraulic oil level is too high. Empty the tank to maximum level." },
+        "24": { ko: "⚠️ <b>오류: 유압 오일 펌프 또는 인버터 오류</b><br>✅ 조치: 유압 시스템이 제때 압력을 형성하지 못합니다. 펌프 및 인버터 기능, 누유, 어큐뮬레이터를 점검하십시오.", en: "⚠️ <b>Error: Hydraulic oil pump or inverter error</b><br>✅ Action: The hydraulic system is unable to pressurise in time. Check the hydraulic system for: functionality of the pump and inverter, leaks, accumulator." },
+        "25": { ko: "⚠️ <b>오류: 유압 오일 온도 높음</b><br>✅ 조치: 유체 순환과 냉각 팬의 기능을 점검하십시오.", en: "⚠️ <b>Error: Hydraulic oil temperature high</b><br>✅ Action: The hydraulic oil temperature is high. Check the fluid circulation and the functionality of the cooling fans." },
+        "26": { ko: "⚠️ <b>오류: 유압 오일 온도 너무 높음</b><br>✅ 조치: 유체 순환과 냉각 팬의 기능을 점검하십시오.", en: "⚠️ <b>Error: Hydraulic oil temperature too high</b><br>✅ Action: The hydraulic oil temperature is too high. Check the fluid circulation and the functionality of the cooling fans." },
+        "27": { ko: "⚠️ <b>오류: 유압 오일 리턴 필터 오염</b><br>✅ 조치: 필터를 교체하십시오.", en: "⚠️ <b>Error: Hydraulic oil return filter polluted</b><br>✅ Action: The hydraulic oil return filter is polluted. Replace the filter." },
+        "28": { ko: "⚠️ <b>오류: 유압 오일 공급 필터 오염</b><br>✅ 조치: 필터를 교체하십시오.", en: "⚠️ <b>Error: Hydraulic oil supply filter polluted</b><br>✅ Action: The hydraulic oil supply filter is polluted Replace the filter." },
+        "29": { ko: "⚠️ <b>오류: 범퍼 바이패스 스위치 활성</b><br>✅ 조치: 범퍼 오버라이드가 활성화되어 있어, 범퍼 센서가 작동하더라도 AGV를 최대 속도 0.1 m/s로 수동 주행할 수 있습니다.", en: "⚠️ <b>Error: Bumper bypass switch active</b><br>✅ Action: The bumper override is active which, with an activated bumper sensor, still allows manual driving with the AGV at a maximum speed of 0.1 m/s." },
+        "30": { ko: "⚠️ <b>오류: 유압 오일 레벨 너무 낮음</b><br>✅ 조치: 오일 레벨이 복구될 때까지 시스템을 사용할 수 없습니다. 누유 여부를 확인하십시오. 리저버의 오일 레벨을 확인하고 적절한 오일로 보충하십시오.", en: "⚠️ <b>Error: Hydraulic oil level too low</b><br>✅ Action: The hydraulic oil level is too low. The system cannot be used until the hydraulic oil level is restored. Check the hydraulic system for leaks. Check the oil level in the reservoir and top up with suitable oil." },
+        "31": { ko: "⚠️ <b>오류: 전면 좌측 범퍼 센서 눌림</b><br>✅ 조치: AGV 손상 여부를 확인하십시오. 오작동인 경우 범퍼 메커니즘과 센서 간의 조정을 확인하십시오.", en: "⚠️ <b>Error: Bumper sensor front left pressed</b><br>✅ Action: The bumper sensor front left no longer sees a suitable object. Check the AGV for damage. If this is a false report, check the adjustment of the sensor in relation to the bumper mechanism." },
+        "32": { ko: "⚠️ <b>오류: 전면 우측 범퍼 센서 눌림</b><br>✅ 조치: AGV 손상 여부를 확인하십시오. 오작동인 경우 범퍼 메커니즘과 센서 간의 조정을 확인하십시오.", en: "⚠️ <b>Error: Bumper sensor front right pressed</b><br>✅ Action: The bumper sensor front right no longer sees a suitable object. Check the AGV for damage. If this is a false report, check the adjustment of the sensor in relation to the bumper mechanism." },
+        "33": { ko: "⚠️ <b>오류: 후면 좌측 범퍼 센서 눌림</b><br>✅ 조치: AGV 손상 여부를 확인하십시오. 오작동인 경우 범퍼 메커니즘과 센서 간의 조정을 확인하십시오.", en: "⚠️ <b>Error: Bumper sensor rear left pressed</b><br>✅ Action: The bumper sensor rear left no longer sees a suitable object. Check the AGV for damage. If this is a false report, check the adjustment of the sensor in relation to the bumper mechanism." },
+        "34": { ko: "⚠️ <b>오류: 후면 우측 범퍼 센서 눌림</b><br>✅ 조치: AGV 손상 여부를 확인하십시오. 오작동인 경우 범퍼 메커니즘과 센서 간의 조정을 확인하십시오.", en: "⚠️ <b>Error: Bumper sensor rear right pressed</b><br>✅ Action: The bumper sensor rear right no longer sees a suitable object. Check the AGV for damage. If this is a false report, check the adjustment of the sensor in relation to the bumper mechanism." },
+        "35": { ko: "⚠️ <b>오류: 비상 정지 버튼(전면 좌측) 눌림</b><br>✅ 조치: 비상 정지 원인 확인 및 안전 확보 후 AGV 리셋", en: "⚠️ <b>Error: Emergency stop button front left pressed</b><br>✅ Action: The emergency stop button front left has been pressed. Check the reason for pressing the emergency stop and reset the AGV when the situation is safe again." },
+        "36": { ko: "⚠️ <b>오류: 비상 정지 버튼(전면 우측) 눌림</b><br>✅ 조치: 비상 정지 원인 확인 및 안전 확보 후 AGV 리셋", en: "⚠️ <b>Error: Emergency stop button front right pressed</b><br>✅ Action: The emergency stop button front right has been pressed. Check the reason for pressing the emergency stop and reset the AGV when the situation is safe again." },
+        "37": { ko: "⚠️ <b>오류: 비상 정지 버튼(중간 좌측) 눌림</b><br>✅ 조치: 비상 정지 원인 확인 및 안전 확보 후 AGV 리셋", en: "⚠️ <b>Error: Emergency stop button middle left pressed</b><br>✅ Action: The emergency stop button middle left has been pressed. Check the reason for pressing the emergency stop and reset the AGV when the situation is safe again." },
+        "38": { ko: "⚠️ <b>오류: 비상 정지 버튼(중간 우측) 눌림</b><br>✅ 조치: 비상 정지 원인 확인 및 안전 확보 후 AGV 리셋", en: "⚠️ <b>Error: Emergency stop button middle right pressed</b><br>✅ Action: The emergency stop button middle right has been pressed. Check the reason for pressing the emergency stop and reset the AGV when the situation is safe again." },
+        "39": { ko: "⚠️ <b>오류: 비상 정지 버튼(후방 좌측) 눌림</b><br>✅ 조치: 비상 정지 원인 확인 및 안전 확보 후 AGV 리셋", en: "⚠️ <b>Error: Emergency stop button rear left pressed</b><br>✅ Action: The emergency stop button rear left has been pressed. Check the reason for pressing the emergency stop and reset the AGV when the situation is safe again." },
+        "40": { ko: "⚠️ <b>오류: 비상 정지 버튼(후방 우측) 눌림</b><br>✅ 조치: 비상 정지 원인 확인 및 안전 확보 후 AGV 리셋", en: "⚠️ <b>Error: Emergency stop button rear right pressed</b><br>✅ Action: The emergency stop button rear right has been pressed. Check the reason for pressing the emergency stop and reset the AGV when the situation is safe again." },
+        "41": { ko: "⚠️ <b>오류: 비상 정지 버튼(MCD) 눌림</b><br>✅ 조치: 비상 정지 또는 플러그 제거 원인 확인 및 안전 확보 후 AGV 리셋", en: "⚠️ <b>Error: Emergency stop button MCD pressed</b><br>✅ Action: The emergency stop button MCD has been pressed or the blindplug on the side of the e-cabinet has been removed. Check the reason for pressing the emergency stop or the removal of the blindplug and reset the AGV when the situation is safe again." },
+        "42": { ko: "⚠️ <b>오류: 전방 좌측 조향 밸브 제어 오류</b><br>✅ 조치: VCU와 모듈 간 배선 확인, 시스템 손상 점검 및 재시작", en: "⚠️ <b>Error: Valve steering front left error</b><br>✅ Action: There is a diagnostics fault on the control of the steering valve front left. Check the wiring from VCU to the module and check the system for faults or damage. If everything is OK, restart the AGV and check for recurring errors." },
+        "43": { ko: "⚠️ <b>오류: 전방 우측 조향 밸브 제어 오류</b><br>✅ 조치: VCU와 모듈 간 배선 확인, 시스템 손상 점검 및 재시작", en: "⚠️ <b>Error: Valve steering front right error</b><br>✅ Action: There is a diagnostics fault on the control of the steering valve front right. Check the wiring from VCU to the module and check the system for faults or damage. If everything is OK, restart the AGV and check for recurring errors." },
+        "44": { ko: "⚠️ <b>오류: 후방 좌측 조향 밸브 제어 오류</b><br>✅ 조치: VCU와 모듈 간 배선 확인, 시스템 손상 점검 및 재시작", en: "⚠️ <b>Error: Valve steering rear left error</b><br>✅ Action: There is a diagnostics fault on the control of the steering valve rear left. Check the wiring from VCU to the module and check the system for faults or damage. If everything is OK, restart the AGV and check for recurring errors." },
+        "45": { ko: "⚠️ <b>오류: 후방 우측 조향 밸브 제어 오류</b><br>✅ 조치: VCU와 모듈 간 배선 확인, 시스템 손상 점검 및 재시작", en: "⚠️ <b>Error: Valve steering rear right error</b><br>✅ Action: There is a diagnostics fault on the control of the steering valve rear right. Check the wiring from VCU to the module and check the system for faults or damage. If everything is OK, restart the AGV and check for recurring errors." },
+        "49": { ko: "⚠️ <b>오류: 내비게이션 라이선스 키 없음</b><br>✅ 조치: 유효한 라이선스 키 입력 후 AGV 재시작", en: "⚠️ <b>Error: Navigation license key not found</b><br>✅ Action: There is no license key entered in the navigation system. Automatic driving of the AGV is not allowed. Please enter a valid license key into the system and restart the AGV." },
+        "50": { ko: "⚠️ <b>오류: 내비게이션 라이선스 키 유효하지 않음</b><br>✅ 조치: 유효한 라이선스 키 입력 후 AGV 재시작 또는 VDL 지원 문의", en: "⚠️ <b>Error: Navigation license key invalid</b><br>✅ Action: The license key entered in the navigation system is invalid. Automatic driving of the AGV is not allowed. Please enter a valid license key into the system and restart the AGV or contact VDL for support on this issue." },
+        "51": { ko: "⚠️ <b>오류: 내비게이션 통신 카운터 오류</b><br>✅ 조치: AGV 리셋, 지속 시 CAN 버스/배선/모듈 확인", en: "⚠️ <b>Error: Communication navigation counter error</b><br>✅ Action: The CAN lifecounter of the Navigation software is not functioning as expected. Reset the AGV. If this error remains present, restart the AGV. Check the CAN bus (quality), wiring and functioning of the module." },
+        "52": { ko: "⚠️ <b>오류: 전방 주행 인버터 경고</b><br>✅ 조치: 진단 도구 및 매뉴얼 참조하여 경고 분석", en: "⚠️ <b>Error: Traction inverter front warning</b><br>✅ Action: The traction inverter front transmits a warning. Refer to appropriate diagnostic tools and supplier (troubleshooting) manual for analysis on the warning and more information on this fault." },
+        "53": { ko: "⚠️ <b>오류: 전방 주행 인버터 오류</b><br>✅ 조치: 진단 도구 및 매뉴얼 참조하여 오류 분석", en: "⚠️ <b>Error: Traction inverter front error</b><br>✅ Action: The traction inverter front transmits an error. Refer to appropriate diagnostic tools and supplier (troubleshooting) manual for analysis on the warning and more information on this fault." },
+        "54": { ko: "⚠️ <b>오류: 후방 주행 인버터 경고</b><br>✅ 조치: 진단 도구 및 매뉴얼 참조하여 경고 분석", en: "⚠️ <b>Error: Traction inverter rear warning</b><br>✅ Action: The traction inverter rear transmits a warning. Refer to appropriate diagnostic tools and supplier (troubleshooting) manual for analysis on the warning and more information on this fault." },
+        "55": { ko: "⚠️ <b>오류: 후방 주행 인버터 오류</b><br>✅ 조치: 진단 도구 및 매뉴얼 참조하여 오류 분석", en: "⚠️ <b>Error: Traction inverter rear error</b><br>✅ Action: The traction inverter rear transmits an error. Refer to appropriate diagnostic tools and supplier (troubleshooting) manual for analysis on the warning and more information on this fault." },
+        "58": { ko: "⚠️ <b>오류: 양쪽 주행 인버터 오류 (주행 불가)</b><br>✅ 조치: 진단 도구 및 매뉴얼 참조하여 오류 분석", en: "⚠️ <b>Error: Traction inverter both error</b><br>✅ Action: Both traction inverters are transmitting an error. The AGV is not able to drive anymore. Refer to appropriate diagnostic tools and supplier (troubleshooting) manual for analysis on the warning and more information on this fault." },
+        "61": { ko: "⚠️ <b>오류: 전방 좌측 조향 각도 엔코더 값 오류</b><br>✅ 조치: CAN 버스, 배선, 모듈, 기구적 연결 상태 및 차축 손상 점검", en: "⚠️ <b>Error: Steering angle encoder front left error</b><br>✅ Action: The steering angle encoder front left gives a different value than expected. Check CAN bus (quality), wiring, module functioning, mechanical coupling between encoder and shaft, and check the axle for damage." },
+        "62": { ko: "⚠️ <b>오류: 전방 우측 조향 각도 엔코더 값 오류</b><br>✅ 조치: CAN 버스, 배선, 모듈, 기구적 연결 상태 및 차축 손상 점검", en: "⚠️ <b>Error: Steering angle encoder front right error</b><br>✅ Action: The steering angle encoder front right gives a different value than expected. Check CAN bus (quality), wiring, module functioning, mechanical coupling between encoder and shaft, and check the axle for damage." },
+        "63": { ko: "⚠️ <b>오류: 후방 좌측 조향 각도 엔코더 값 오류</b><br>✅ 조치: CAN 버스, 배선, 모듈, 기구적 연결 상태 및 차축 손상 점검", en: "⚠️ <b>Error: Steering angle encoder rear left error</b><br>✅ Action: The steering angle encoder rear left gives a different value than expected. Check CAN bus (quality), wiring, module functioning, mechanical coupling between encoder and shaft, and check the axle for damage." },
+        "64": { ko: "⚠️ <b>오류: 후방 우측 조향 각도 엔코더 값 오류</b><br>✅ 조치: CAN 버스, 배선, 모듈, 기구적 연결 상태 및 차축 손상 점검", en: "⚠️ <b>Error: Steering angle encoder rear right error</b><br>✅ Action: The steering angle encoder rear right gives a different value than expected. Check CAN bus (quality), wiring, module functioning, mechanical coupling between encoder and shaft, and check the axle for damage." },
+        "65": { ko: "⚠️ <b>오류: 전방 좌측 속도 엔코더 값 오류</b><br>✅ 조치: 진단 도구로 엔코더 기능 점검, 샤프트 연결 및 케이블 확인", en: "⚠️ <b>Error: Speed encoder front left error</b><br>✅ Action: The front left speed encoder gives a value different than expected. Check the functionality of encoder using appropriate diagnostic tools, check the mechanical connection to the shaft and the cabling." },
+        "66": { ko: "⚠️ <b>오류: 전방 우측 속도 엔코더 값 오류</b><br>✅ 조치: 진단 도구로 엔코더 기능 점검, 샤프트 연결 및 케이블 확인", en: "⚠️ <b>Error: Speed encoder front right error</b><br>✅ Action: The front right speed encoder gives a value different than expected. Check the functionality of encoder using appropriate diagnostic tools, check the mechanical connection to the shaft and the cabling." },
+        "67": { ko: "⚠️ <b>오류: 후방 좌측 속도 엔코더 값 오류</b><br>✅ 조치: 진단 도구로 엔코더 기능 점검, 샤프트 연결 및 케이블 확인", en: "⚠️ <b>Error: Speed encoder rear left error</b><br>✅ Action: The rear left speed encoder gives a value different than expected. Check the functionality of encoder using appropriate diagnostic tools, check the mechanical connection to the shaft and the cabling." },
+        "68": { ko: "⚠️ <b>오류: 후방 우측 속도 엔코더 값 오류</b><br>✅ 조치: 진단 도구로 엔코더 기능 점검, 샤프트 연결 및 케이블 확인", en: "⚠️ <b>Error: Speed encoder rear right error</b><br>✅ Action: The rear right speed encoder gives a value different than expected. Check the functionality of encoder using appropriate diagnostic tools, check the mechanical connection to the shaft and the cabling." },
+        "79": { ko: "⚠️ <b>오류: 다중 속도 엔코더 값 오류</b><br>✅ 조치: 진단 도구로 엔코더 기능 점검 및 케이블 확인", en: "⚠️ <b>Error: Speed encoder two or more error</b><br>✅ Action: Several speed encoders give a different value than expected. Check the functionality of encoders using appropriate diagnostic tools and check cabling." },
+        "80": { ko: "⚠️ <b>오류: AGV 과속 (최대 속도 초과)</b><br>✅ 조치: CAN 버스, 배선, 주행 인버터 기능 점검 및 로그 파일 수집 후 문의", en: "⚠️ <b>Error: AGV overspeed</b><br>✅ Action: The AGV is driving faster than the maximum speed. Check the CAN bus (quality), wiring and functioning of the traction inverters. Collect navigation log files and contact VDL." },
+        "81": { ko: "⚠️ <b>오류: AGV 비상 정지 안정성 문제 (조향각/속도 부조화)</b><br>✅ 조치: 조향 정렬 상태 점검 및 필요시 수정", en: "⚠️ <b>Error: AGV emergency stop stability</b><br>✅ Action: The steering angle of the AGV combined with the speed resulted in an unstable situation. The AGV has made an emergency stop. Check the steering alignment of the AGV and correct it if necessary." },
+        "82": { ko: "⚠️ <b>오류: MCD 비 조작 시 즉시 정지 실패</b><br>✅ 조치: CAN 버스, 배선, 주행 인버터 및 브레이크 기능 점검", en: "⚠️ <b>Error: AGV stopped by hold to run</b><br>✅ Action: The AGV did not come to a stop fast enough in manual mode after dropping speed set point of the MCD. Check the CAN bus (quality), wiring and functioning of the traction inverters and brakes." },
+        "83": { ko: "⚠️ <b>오류: AGV 리포지셔닝 실패</b><br>✅ 조치: CAN 버스, 배선, 주행 인버터 및 브레이크 기능 점검", en: "⚠️ <b>Error: AGV repositioning failed</b><br>✅ Action: The AGV is unable to correct the position within tolerance at the given stopping point. Manually position the AGV at the stopping point and resume operation." },
+        "84": { ko: "⚠️ <b>오류: 전방 비상 정지 버튼 눌림</b><br>✅ 조치: 눌린 버튼 확인 및 원인 파악, 안전 확보 후 리셋", en: "⚠️ <b>Error: Emergency stop button safety circuit front pressed</b><br>✅ Action: The safety circuit of the front emergency stop buttons is interrupted. Check which emergency stop has been pressed and the reason for pressing the emergency stop or why this circuit has been interrupted. Reset the AGV when the situation is safe again." },
+        "85": { ko: "⚠️ <b>오류: 후방 비상 정지 버튼 눌림</b><br>✅ 조치: 눌린 버튼 확인 및 원인 파악, 안전 확보 후 리셋", en: "⚠️ <b>Error: Emergency stop button safety circuit rear pressed</b><br>✅ Action: The safety circuit of the rear emergency stop buttons is interrupted. Check which emergency stop has been pressed and the reason for pressing the emergency stop or why this circuit has been interrupted. Reset the AGV when the situation is safe again." },
+        "86": { ko: "⚠️ <b>오류: 중앙 좌측 비상 정지 버튼 눌림</b><br>✅ 조치: 눌린 버튼 확인 및 원인 파악, 안전 확보 후 리셋", en: "⚠️ <b>Error: Emergency stop button safety circuit middle left pressed</b><br>✅ Action: The safety circuit of the emergency stop button centre left is interrupted. Check the reason and reset the AGV when safe." },
+        "87": { ko: "⚠️ <b>오류: 중앙 우측 비상 정지 버튼 눌림</b><br>✅ 조치: 눌린 버튼 확인 및 원인 파악, 안전 확보 후 리셋", en: "⚠️ <b>Error: Emergency stop button safety circuit middle right pressed</b><br>✅ Action: The safety circuit of the emergency stop button centre right is interrupted. Check the reason and reset the AGV when safe." },
+        "88": { ko: "⚠️ <b>오류: 측면 비상 정지 버튼 눌림</b><br>✅ 조치: 눌린 버튼 확인 및 원인 파악, 안전 확보 후 리셋", en: "⚠️ <b>Error: Emergency stop button safety circuit powerpack pressed</b><br>✅ Action: The safety circuit of the emergency stop button in the power pack is interrupted. Check the reason and reset the AGV when safe." },
+        "89": { ko: "⚠️ <b>오류: 주행 인버터 림프 홈(Limp home) 모드 활성화</b><br>✅ 조치: 진단 도구 및 매뉴얼 참조하여 인버터 오류 분석", en: "⚠️ <b>Error: Traction inverter limp home active</b><br>✅ Action: One of the traction inverter transmits an error and is disabled. The AGV continues driving at reduced speed. Refer to diagnostic tools." },
+        "90": { ko: "⚠️ <b>오류: 직선 구간 경로 이탈 과다</b><br>✅ 조치: AGV를 수동으로 경로에 복귀시키고 운행 재개", en: "⚠️ <b>Error: AGV route deviation on straight segment too large</b><br>✅ Action: The AGV deviated too far from its route on a straight segment. Manually place the AGV back on its route and re-enter operation." },
+        "91": { ko: "⚠️ <b>오류: 곡선 구간 경로 이탈 과다</b><br>✅ 조치: AGV를 수동으로 경로에 복귀시키고 운행 재개", en: "⚠️ <b>Error: AGV Route deviation in bend too large</b><br>✅ Action: The AGV deviated too far from its route on a turn segment. Manually place the AGV back on its route and re-enter operation." },
+        "94": { ko: "⚠️ <b>오류: 휠 직경 재보정 없이 장거리 주행</b><br>✅ 조치: HMI 버튼을 사용하여 수동 리셋 수행", en: "⚠️ <b>Error: AGV driven too far without wheel diameter recallibration</b><br>✅ Action: The AGV has been driven straight for too long without recalibrating the wheel diameter. Perform a manual reset using the corresponding button on the HMI." },
+        "96": { ko: "⚠️ <b>오류: 전방 좌측 타이어 펑크 의심 (직경 계산값 낮음)</b><br>✅ 조치: 타이어 공기압 확인 및 보정 후 HMI에서 휠 직경 리셋", en: "⚠️ <b>Error: Tire front left flat</b><br>✅ Action: The calculated diameter of the tyre front left is too low. Check tyre pressure. Reset wheel diameter on HMI." },
+        "97": { ko: "⚠️ <b>오류: 전방 우측 타이어 펑크 의심 (직경 계산값 낮음)</b><br>✅ 조치: 타이어 공기압 확인 및 보정 후 HMI에서 휠 직경 리셋", en: "⚠️ <b>Error: Tire front right flat</b><br>✅ Action: The calculated diameter of the tyre front right is too low. Check tyre pressure. Reset wheel diameter on HMI." },
+        "98": { ko: "⚠️ <b>오류: 후방 좌측 타이어 펑크 의심 (직경 계산값 낮음)</b><br>✅ 조치: 타이어 공기압 확인 및 보정 후 HMI에서 휠 직경 리셋", en: "⚠️ <b>Error: Tire rear left flat</b><br>✅ Action: The calculated diameter of the tyre rear left is too low. Check tyre pressure. Reset wheel diameter on HMI." },
+        "99": { ko: "⚠️ <b>오류: 후방 우측 타이어 펑크 의심 (직경 계산값 낮음)</b><br>✅ 조치: 타이어 공기압 확인 및 보정 후 HMI에서 휠 직경 리셋", en: "⚠️ <b>Error: Tire rear right flat</b><br>✅ Action: The calculated diameter of the tyre rear right is too low. Check tyre pressure. Reset wheel diameter on HMI." },
+        "100": { ko: "⚠️ <b>오류: 전방 트랜스폰더 안테나 인식 실패 (1개 놓침)</b><br>✅ 조치: 트랜스폰더 안테나 점검", en: "⚠️ <b>Error: Transponder antenna front missed transponder</b><br>✅ Action: The front transponder antenna missed one transponder that the AGV did expect to read." },
+        "101": { ko: "⚠️ <b>오류: 후방 트랜스폰더 안테나 인식 실패 (1개 놓침)</b><br>✅ 조치: 트랜스폰더 안테나 점검", en: "⚠️ <b>Error: Transponder antenna rear missed transponder</b><br>✅ Action: The rear transponder antenna missed one transponder that the AGV did expect to read." },
+        "102": { ko: "⚠️ <b>오류: 전방 트랜스폰더 안테나 다수 인식 실패 (정지)</b><br>✅ 조치: AGV를 수동으로 경로에 복귀시키고 운행 재개", en: "⚠️ <b>Error: Transponder antenna front missed too many transponders</b><br>✅ Action: The front transponder antenna missed too many transponders. AGV stopped. Manually position AGV back on route." },
+        "103": { ko: "⚠️ <b>오류: 후방 트랜스폰더 안테나 다수 인식 실패 (정지)</b><br>✅ 조치: AGV를 수동으로 경로에 복귀시키고 운행 재개", en: "⚠️ <b>Error: Transponder antenna rear missed too many transponders</b><br>✅ Action: The rear transponder antenna missed too many transponders. AGV stopped. Manually position AGV back on route." },
+        "104": { ko: "⚠️ <b>오류: 전방 트랜스폰더 안테나 복수 인식 실패</b><br>✅ 조치: 트랜스폰더 안테나 점검", en: "⚠️ <b>Error: Transponder antenna front missed multiple transponders</b><br>✅ Action: The front transponder antenna missed multiple transponders that the AGV did expect to read." },
+        "105": { ko: "⚠️ <b>오류: 후방 트랜스폰더 안테나 복수 인식 실패</b><br>✅ 조치: 트랜스폰더 안테나 점검", en: "⚠️ <b>Error: Transponder antenna rear missed multiple transponders</b><br>✅ Action: The rear transponder antenna missed multiple transponders that the AGV did expect to read." },
+        "106": { ko: "⚠️ <b>오류: 전방 트랜스폰더 안테나 통신 오류</b><br>✅ 조치: CAN 버스, 배선, 모듈 기능 점검 (통신 복구 전까지 감속 주행)", en: "⚠️ <b>Error: Transponder antenna front communication error</b><br>✅ Action: Navigation detects CAN error with front antenna. AGV drives at reduced speed. Check CAN bus, wiring, and module." },
+        "107": { ko: "⚠️ <b>오류: 후방 트랜스폰더 안테나 통신 오류</b><br>✅ 조치: CAN 버스, 배선, 모듈 기능 점검 (통신 복구 전까지 감속 주행)", en: "⚠️ <b>Error: Transponder antenna rear communication error</b><br>✅ Action: Navigation detects CAN error with rear antenna. AGV drives at reduced speed. Check CAN bus, wiring, and module." },
+        "108": { ko: "⚠️ <b>오류: VCU 커뮤니케이션 오류</b><br>✅ 조치: AGV 리셋/재시작, CAN 버스 및 모듈 점검", en: "⚠️ <b>Error: Communication VCU counter error</b><br>✅ Action: The CAN lifecounter of the VCU is not functioning. Reset/Restart AGV. Check CAN bus and module." },
+        "109": { ko: "⚠️ <b>오류: 전방 트랜스폰더 잘못된 태그 2회 연속 인식</b><br>✅ 조치: AGV 실제 위치와 인식 위치 대조 및 태그 프로그래밍 확인", en: "⚠️ <b>Error: Transponder antenna front two wrong transponders read</b><br>✅ Action: Front antenna read 2 wrong transponders in succession. Check AGV position and transponder programming." },
+        "110": { ko: "⚠️ <b>오류: 후방 트랜스폰더 잘못된 태그 2회 연속 인식</b><br>✅ 조치: AGV 실제 위치와 인식 위치 대조 및 태그 프로그래밍 확인", en: "⚠️ <b>Error: Transponder antenna rear two wrong transponders read</b><br>✅ Action: Rear antenna read 2 wrong transponders in succession. Check AGV position and transponder programming." },
+        "111": { ko: "⚠️ <b>오류: VCU 통신 CRC 오류</b><br>✅ 조치: AGV 리셋/재시작, CAN 버스, 배선, 모듈 점검", en: "⚠️ <b>Error: Communication VCU CRC error</b><br>✅ Action: Navigation checksum mismatch with VCU. Reset/Restart AGV. Check CAN bus and modules." },
+        "112": { ko: "⚠️ <b>오류: BMS 통신 CRC 오류</b><br>✅ 조치: AGV 리셋/재시작, CAN 버스, 배선, 모듈 점검", en: "⚠️ <b>Error: Communication BMS CRC error</b><br>✅ Action: VCU checksum mismatch with BMS. Reset/Restart AGV. Check CAN bus and modules." },
+        "113": { ko: "⚠️ <b>오류: 내비게이션 통신 CRC 오류</b><br>✅ 조치: AGV 리셋/재시작, CAN 버스, 배선, 모듈 점검", en: "⚠️ <b>Error: Communication navigation CRC error</b><br>✅ Action: VCU checksum mismatch with Navigation. Reset/Restart AGV. Check CAN bus and modules." },
+        "114": { ko: "⚠️ <b>오류: 정차 중 도어/E-캐비닛 열림</b><br>✅ 조치: 모든 도어 닫기 및 센서 조정 확인", en: "⚠️ <b>Error: AGV standing still door e-cabinet open</b><br>✅ Action: One of the doors is open. Close all doors and check sensors." },
+        "115": { ko: "⚠️ <b>오류: 속도 엔코더 회전 방향 오류</b><br>✅ 조치: 진단 도구로 엔코더 기능 및 케이블 점검", en: "⚠️ <b>Error: Speed encoder direction of rotation error</b><br>✅ Action: One of the speed encoders is rotating in the wrong direction. Check encoders and cabling." },
+        "116": { ko: "⚠️ <b>오류: AGV 미끄러짐 또는 이동 거리 부족</b><br>✅ 조치: AGV 위치 및 노면 타이어 미끄러짐 확인", en: "⚠️ <b>Error: AGV slip error or less distance travelled than expected</b><br>✅ Action: AGV travelled less distance than expected. Check AGV position and tyre slippage." },
+        "117": { ko: "⚠️ <b>오류: BMS 상태 오류</b><br>✅ 조치: 공급사 매뉴얼 및 진단 도구 참조", en: "⚠️ <b>Error: BMS state in error</b><br>✅ Action: BMS is in error status. Refer to supplier manual and diagnostic tools." },
+        "119": { ko: "⚠️ <b>오류: 배터리 SOC(충전량) 너무 낮음</b><br>✅ 조치: 진단 도구로 배터리 확인 및 수동 충전 시도 (수동 이동 가능)", en: "⚠️ <b>Error: Battery SOC too low</b><br>✅ Action: Battery voltage too low, not charging. AGV can be moved manually. Check battery and try to charge manually." },
+        "125": { ko: "⚠️ <b>오류: 전방 장애물 감지 비상 정지</b><br>✅ 조치: 전방 장애물 확인 및 제거 후 운행 재개 라이다 점검", en: "⚠️ <b>Error: Obstacle detection front emergency stop</b><br>✅ Action: Front obstacle detection detects object in emergency field. Remove object or move AGV." },
+        "126": { ko: "⚠️ <b>오류: 후방 장애물 감지 비상 정지</b><br>✅ 조치: 후방 장애물 확인 및 제거 후 운행 재개 라이다 점검", en: "⚠️ <b>Error: Obstacle detection rear emergency stop</b><br>✅ Action: Rear obstacle detection detects object in emergency field. Remove object or move AGV." },
+        "127": { ko: "⚠️ <b>오류: 전방 장애물 감지 (감속/정지)</b><br>✅ 조치: 경고 영역 내 장애물 감지됨 라이다 점검", en: "⚠️ <b>Error: Obstacle detection front normal stop</b><br>✅ Action: Front obstacle detection detects object in warning field. AGV brakes." },
+        "128": { ko: "⚠️ <b>오류: 후방 장애물 감지 (감속/정지)</b><br>✅ 조치: 경고 영역 내 장애물 감지됨 라이다 점검", en: "⚠️ <b>Error: Obstacle detection rear normal stop</b><br>✅ Action: Rear obstacle detection detects object in warning field. AGV brakes." },
+        "136": { ko: "⚠️ <b>오류: PCS 비상 정지 명령 수신</b><br>✅ 조치: FMS/PCS 시스템 확인", en: "⚠️ <b>Error: PCS emergency stop</b><br>✅ Action: FMS/PCS system sent emergency stop command." },
+        "139": { ko: "⚠️ <b>오류: 전방 조향 정렬 오차 과다</b><br>✅ 조치: 조향 정렬 확인 및 기구적/HMI 보정 수행", en: "⚠️ <b>Error: Steering alignment front error or calibration error</b><br>✅ Action: Front steering angle offset too large. Check alignment and correct mechanically/HMI." },
+        "140": { ko: "⚠️ <b>오류: 후방 조향 정렬 오차 과다</b><br>✅ 조치: 조향 정렬 확인 및 기구적/HMI 보정 수행", en: "⚠️ <b>Error: Steering alignment rear error or calibration error</b><br>✅ Action: Rear steering angle offset too large. Check alignment and correct mechanically/HMI." },
+        "141": { ko: "⚠️ <b>오류: PCS 경로 오류 (유효하지 않음)</b><br>✅ 조치: AGV 리셋 및 새 경로 전송 요청", en: "⚠️ <b>Error: PCS route error</b><br>✅ Action: Received route from PCS marked invalid. Send reset and new route." },
+        "142": { ko: "⚠️ <b>오류: PCS 정지 지점 오류 (유효하지 않음)</b><br>✅ 조치: AGV 리셋 및 새 경로 전송 요청", en: "⚠️ <b>Error: PCS stopping point error</b><br>✅ Action: Received stop point from PCS marked invalid. Send reset and new route." },
+        "143": { ko: "⚠️ <b>오류: 경로 상 트랜스폰더 위치 유효하지 않음</b><br>✅ 조치: AGV를 수동으로 경로에 복귀시키고 운행 재개", en: "⚠️ <b>Error: AGV transponder position on route invalid</b><br>✅ Action: AGV position based on transponder is not valid on route. Manually place AGV on route." },
+        "144": { ko: "⚠️ <b>오류: 전방 좌측 휠 오차 또는 속도계 에러</b><br>✅ 조치: 속도 엔코더 및 타이어 공기압 점검 후 HMI 리셋", en: "⚠️ <b>Error: Wheel diameter front left too large or speed encoder error</b><br>✅ Action: Front left wheel diameter too large. Check speed encoder, tyre pressure. Reset wheel diameter." },
+        "145": { ko: "⚠️ <b>오류: 전방 우측 휠 오차 또는 속도계 에러</b><br>✅ 조치: 속도 엔코더 및 타이어 공기압 점검 후 HMI 리셋", en: "⚠️ <b>Error: Wheel diameter front right too large or speed encoder error</b><br>✅ Action: Front right wheel diameter too large. Check speed encoder, tyre pressure. Reset wheel diameter." },
+        "146": { ko: "⚠️ <b>오류: 후방 좌측 휠 오차 또는 속도계 에러</b><br>✅ 조치: 속도 엔코더 및 타이어 공기압 점검 후 HMI 리셋", en: "⚠️ <b>Error: Wheel diameter rear left too large or speed encoder error</b><br>✅ Action: Rear left wheel diameter too large. Check speed encoder, tyre pressure. Reset wheel diameter." },
+        "147": { ko: "⚠️ <b>오류: 후방 우측 휠 오차 또는 속도계 에러</b><br>✅ 조치: 속도 엔코더 및 타이어 공기압 점검 후 HMI 리셋", en: "⚠️ <b>Error: Wheel diameter rear right too large or speed encoder error</b><br>✅ Action: Rear right wheel diameter too large. Check speed encoder, tyre pressure. Reset wheel diameter." },
+        "148": { ko: "⚠️ <b>오류: AGV 이동 불가 (방향 오류 또는 저속)</b><br>✅ 조치: 이동 경로 장애물 및 주행/유압 시스템 고장 확인", en: "⚠️ <b>Error: AGV does not move</b><br>✅ Action: AGV moving wrong direction or too slow. Check path for obstacles, traction, hydraulic system." },
+        "149": { ko: "⚠️ <b>오류: 전방 조향 제어 오류 (각도 과다/엔코더 오류)</b><br>✅ 조치: 조향 각도 및 차축 손상 점검, CAN 버스/모듈 확인", en: "⚠️ <b>Error: Steering control front error</b><br>✅ Action: Front steering angle too large or encoder error. Check steering angle, axle, CAN bus, modules." },
+        "150": { ko: "⚠️ <b>오류: 후방 조향 제어 오류 (각도 과다/엔코더 오류)</b><br>✅ 조치: 조향 각도 및 차축 손상 점검, CAN 버스/모듈 확인", en: "⚠️ <b>Error: Steering control rear error</b><br>✅ Action: Rear steering angle too large or encoder error. Check steering angle, axle, CAN bus, modules." },
+        "151": { ko: "⚠️ <b>오류: 전방 조향 제어 경고 (각도 편차)</b><br>✅ 조치: 유압 시스템(펌프, 인버터, 누유, 센서 등) 점검", en: "⚠️ <b>Error: Steering control front warning</b><br>✅ Action: Deviation between desired and actual front steering angle. Check hydraulics, pump, inverter, sensors." },
+        "152": { ko: "⚠️ <b>오류: 후방 조향 제어 경고 (각도 편차)</b><br>✅ 조치: 유압 시스템(펌프, 인버터, 누유, 센서 등) 점검", en: "⚠️ <b>Error: Steering control rear warning</b><br>✅ Action: Deviation between desired and actual rear steering angle. Check hydraulics, pump, inverter, sensors." },
+        "155": { ko: "⚠️ <b>오류: AGV 위치 급변</b><br>✅ 조치: AGV를 수동으로 경로에 복귀시키고 운행 재개", en: "⚠️ <b>Error: AGV position jump too high</b><br>✅ Action: Position correction on odometry too large. Manually place AGV back on route." },
+        "162": { ko: "⚠️ <b>오류: AGV 운행 구역 이탈</b><br>✅ 조치: AGV를 수동으로 운행 구역 내로 복귀시키고 운행 재개", en: "⚠️ <b>Error: AGV position report outside defined zone</b><br>✅ Action: AGV outside operational area. Manually place AGV back in area." },
+        "164": { ko: "⚠️ <b>오류: 브레이크 해제 불가</b><br>✅ 조치: 유압 시스템 점검 및 브레이크 마모/손상 확인", en: "⚠️ <b>Error: Brakes are not released</b><br>✅ Action: Brakes cannot be released. Check hydraulic system, pump, inverter, brakes for wear." },
+        "165": { ko: "⚠️ <b>오류: 전방 장애물 감지 통신 오류</b><br>✅ 조치: AGV 리셋/재시작, 이더넷 케이블 및 모듈 점검", en: "⚠️ <b>Error: Obstacle detection front communication error</b><br>✅ Action: Ethernet error with front OD. AGV reduced speed. Check cabling and module." },
+        "166": { ko: "⚠️ <b>오류: 후방 장애물 감지 통신 오류</b><br>✅ 조치: AGV 리셋/재시작, 이더넷 케이블 및 모듈 점검", en: "⚠️ <b>Error: Obstacle detection rear communication error</b><br>✅ Action: Ethernet error with rear OD. AGV reduced speed. Check cabling and module." },
+        "170": { ko: "⚠️ <b>오류: 전방 장애물 센서 오염 경고</b><br>✅ 조치: 센서를 적절한 세정제로 청소", en: "⚠️ <b>Error: Obstacle detection front contamination warning</b><br>✅ Action: Front sensor contaminated. Clean sensor." },
+        "171": { ko: "⚠️ <b>오류: 후방 장애물 센서 오염 경고</b><br>✅ 조치: 센서를 적절한 세정제로 청소", en: "⚠️ <b>Error: Obstacle detection rear contamination warning</b><br>✅ Action: Rear sensor contaminated. Clean sensor." },
+        "172": { ko: "⚠️ <b>오류: 전방 장애물 센서 장치 오류</b><br>✅ 조치: 진단 도구 및 매뉴얼 참조하여 오류 분석", en: "⚠️ <b>Error: Obstacle detection front not ok</b><br>✅ Action: Front OD device error. Refer to diagnostic tools." },
+        "173": { ko: "⚠️ <b>오류: 후방 장애물 센서 장치 오류</b><br>✅ 조치: 진단 도구 및 매뉴얼 참조하여 오류 분석", en: "⚠️ <b>Error: Obstacle detection rear not ok</b><br>✅ Action: Rear OD device error. Refer to diagnostic tools." },
+        "174": { ko: "⚠️ <b>오류: 전방 장애물 감지 유지보수 테스트 활성화됨</b><br>✅ 조치: 자동 모드 운행 불가, 테스트 비활성화 후 운행 재개", en: "⚠️ <b>Error: Obstacle detection front maintenance test active in auto</b><br>✅ Action: Front OD test active in auto mode. De-activate self-test." },
+        "175": { ko: "⚠️ <b>오류: 후방 장애물 감지 유지보수 테스트 활성화됨</b><br>✅ 조치: 자동 모드 운행 불가, 테스트 비활성화 후 운행 재개", en: "⚠️ <b>Error: Obstacle detection rear maintenance test active in auto</b><br>✅ Action: Rear OD test active in auto mode. De-activate self-test." },
+        "178": { ko: "⚠️ <b>오류: 브레이크 체결 실패</b><br>✅ 조치: 유압 시스템 점검 및 브레이크 마모/손상 확인", en: "⚠️ <b>Error: Brakes applying failed</b><br>✅ Action: Brakes cannot be applied. Check hydraulic system, pump, inverter, brakes." },
+        "179": { ko: "⚠️ <b>오류: 내비게이션 파라미터 체크섬 오류</b><br>✅ 조치: AGV 리셋, 필요시 빈 파라미터 파일 업로드", en: "⚠️ <b>Error: Navigation parameter file checksum error</b><br>✅ Action: Navigation parameter checksum incorrect. Reset AGV/wheel diameter. Upload empty parameter file if needed." },
+        "180": { ko: "⚠️ <b>오류: 주행 중 브레이크 체결됨</b><br>✅ 조치: 유압 시스템 점검 및 브레이크 마모/손상 확인", en: "⚠️ <b>Error: Brakes applied while driving</b><br>✅ Action: Brake pressure too low while driving. Check hydraulic system, pump, inverter, brakes." },
+        "181": { ko: "⚠️ <b>오류: 내비게이션 컨트롤러 하드디스크 참</b><br>✅ 조치: 오래된 로그 파일 삭제 또는 이미지 덮어쓰기", en: "⚠️ <b>Error: Navigation controller harddisk full</b><br>✅ Action: Navigation memory full. Delete old log files or overwrite image." },
+        "182": { ko: "⚠️ <b>오류: 모드 선택 스위치 자동 아님</b><br>✅ 조치: 스위치 위치 및 AGV 상태 확인", en: "⚠️ <b>Error: Mode selector switch not on mode automatic</b><br>✅ Action: AGV moved to mode other than Automatic while allocated. Check switch." },
+        "183": { ko: "⚠️ <b>오류: 모드 선택 스위치 충전 모드</b><br>✅ 조치: 스위치 위치 및 AGV 상태 확인", en: "⚠️ <b>Error: Mode selector switch on mode charge</b><br>✅ Action: AGV switched to Charge mode while allocated. Check switch." },
+        "187": { ko: "⚠️ <b>오류: 포지셔닝 진입 속도 높음</b><br>✅ 조치: AGV 위치, 서스펜션 손상, 중량 센서 조정 상태 확인", en: "⚠️ <b>Error: Positioning speed too high</b><br>✅ Action: AGV started positioning at too high speed. Check weight sensors and suspension." },
+        "189": { ko: "⚠️ <b>오류: PCS 잘못된 메시지 코드 수신</b><br>✅ 조치: PCS에서 전송된 메시지 확인", en: "⚠️ <b>Error: PCS wrong message code received</b><br>✅ Action: Message code from PCS incorrect. Check message." },
+        "190": { ko: "⚠️ <b>오류: PCS 메시지 길이 초과</b><br>✅ 조치: PCS에서 전송된 메시지 확인", en: "⚠️ <b>Error: PCS message too long</b><br>✅ Action: Message from PCS too long. Check message." },
+        "191": { ko: "⚠️ <b>오류: PCS 메시지 길이 부족</b><br>✅ 조치: PCS에서 전송된 메시지 확인", en: "⚠️ <b>Error: PCS message too short</b><br>✅ Action: Message from PCS too short. Check message." },
+        "192": { ko: "⚠️ <b>오류: AGV 과적 (62,000kg 초과)</b><br>✅ 조치: 부하 제거 또는 중량 감소 시까지 감속 주행", en: "⚠️ <b>Error: AGV carrying heavy load</b><br>✅ Action: Measured load > 62,000 kg. AGV drives slower." },
+        "235": { ko: "⚠️ <b>오류: 원격 I/O 모듈 1 통신 오류</b><br>✅ 조치: AGV 리셋/재시작, CAN 버스 및 모듈 점검", en: "⚠️ <b>Error: Remote IO module 1 communication error</b><br>✅ Action: CAN error remote IO 1. Reset/Restart AGV. Check CAN bus/module." },
+        "236": { ko: "⚠️ <b>오류: 원격 I/O 모듈 2 통신 오류</b><br>✅ 조치: AGV 리셋/재시작, CAN 버스 및 모듈 점검", en: "⚠️ <b>Error: Remote IO module 2 communication error</b><br>✅ Action: CAN error remote IO 2. Reset/Restart AGV. Check CAN bus/module." },
+        "237": { ko: "⚠️ <b>오류: 원격 I/O 모듈 3 통신 오류</b><br>✅ 조치: AGV 리셋/재시작, CAN 버스 및 모듈 점검", en: "⚠️ <b>Error: Remote IO module 3 communication error</b><br>✅ Action: CAN error remote IO 3. Reset/Restart AGV. Check CAN bus/module." },
+        "238": { ko: "⚠️ <b>오류: 원격 I/O 모듈 4 통신 오류</b><br>✅ 조치: AGV 리셋/재시작, CAN 버스 및 모듈 점검", en: "⚠️ <b>Error: Remote IO module 4 communication error</b><br>✅ Action: CAN error remote IO 4. Reset/Restart AGV. Check CAN bus/module." },
+        "239": { ko: "⚠️ <b>오류: 원격 I/O 모듈 5 통신 오류</b><br>✅ 조치: AGV 리셋/재시작, CAN 버스 및 모듈 점검", en: "⚠️ <b>Error: Remote IO module 5 communication error</b><br>✅ Action: CAN error remote IO 5. Reset/Restart AGV. Check CAN bus/module." },
+        "240": { ko: "⚠️ <b>오류: 원격 I/O 모듈 6 통신 오류</b><br>✅ 조치: AGV 리셋/재시작, CAN 버스 및 모듈 점검", en: "⚠️ <b>Error: Remote IO module 6 communication error</b><br>✅ Action: CAN error remote IO 6. Reset/Restart AGV. Check CAN bus/module." },
+        "245": { ko: "⚠️ <b>오류: 후방 주행 인버터 통신 오류</b><br>✅ 조치: AGV 리셋/재시작, CAN 버스 및 모듈 점검", en: "⚠️ <b>Error: Traction inverter rear communication error</b><br>✅ Action: CAN error rear traction. Reset/Restart AGV. Check CAN bus/module." },
+        "246": { ko: "⚠️ <b>오류: 전방 주행 인버터 통신 오류</b><br>✅ 조치: AGV 리셋/재시작, CAN 버스 및 모듈 점검", en: "⚠️ <b>Error: Traction inverter front communication error</b><br>✅ Action: CAN error front traction. Reset/Restart AGV. Check CAN bus/module." },
+        "248": { ko: "⚠️ <b>오류: 양쪽 주행 인버터 통신 오류</b><br>✅ 조치: AGV 리셋/재시작, CAN 버스 및 모듈 점검", en: "⚠️ <b>Error: Traction inverter both communication error</b><br>✅ Action: CAN error both tractions. Reset/Restart AGV. Check CAN bus/module." },
+        "253": { ko: "⚠️ <b>오류: VCU CAN0 통신 오류</b><br>✅ 조치: AGV 리셋/재시작, CAN 버스 및 모듈 점검", en: "⚠️ <b>Error: VCU CAN0 communication error</b><br>✅ Action: CAN error VCU CAN0. Reset/Restart AGV. Check CAN bus/module." },
+        "254": { ko: "⚠️ <b>오류: VCU CAN1 통신 오류</b><br>✅ 조치: AGV 리셋/재시작, CAN 버스 및 모듈 점검", en: "⚠️ <b>Error: VCU CAN1 communication error</b><br>✅ Action: CAN error VCU CAN1. Reset/Restart AGV. Check CAN bus/module." },
+        "255": { ko: "⚠️ <b>오류: VCU CAN2 통신 오류</b><br>✅ 조치: AGV 리셋/재시작, CAN 버스 및 모듈 점검", en: "⚠️ <b>Error: VCU CAN2 communication error</b><br>✅ Action: CAN error VCU CAN2. Reset/Restart AGV. Check CAN bus/module." },
+        "272": { ko: "⚠️ <b>오류: 전방 장애물 감지 셀프 테스트 실패</b><br>✅ 조치: 모듈 기능 점검 (테스트 통과 전까지 감속 주행)", en: "⚠️ <b>Error: Obstacle detection front selftest failed</b><br>✅ Action: Front OD self-test failed. AGV reduced speed. Check module." },
+        "273": { ko: "⚠️ <b>오류: 후방 장애물 감지 셀프 테스트 실패</b><br>✅ 조치: 모듈 기능 점검 (테스트 통과 전까지 감속 주행)", en: "⚠️ <b>Error: Obstacle detection rear selftest failed</b><br>✅ Action: Rear OD self-test failed. AGV reduced speed. Check module." },
+        "276": { ko: "⚠️ <b>오류: 장애물 감지 비상 정지 해제 후 저속 주행</b><br>✅ 조치: 12미터 동안 저속 주행 후 정상 속도 복귀", en: "⚠️ <b>Error: Obstacle detection emergency stop lifted driving slow</b><br>✅ Action: OD emergency stop lifted. AGV slow for 12m then normal." },
+        "277": { ko: "⚠️ <b>오류: BTMS 2 600VDC 공급 전압 부족</b><br>✅ 조치: 전원 공급 장치 점검 및 매뉴얼 참조", en: "⚠️ <b>Error: BTMS 2 600VDC supply undervoltage</b><br>✅ Action: Undervoltage on 600V output. Check power supply." },
+        "278": { ko: "⚠️ <b>오류: BTMS 2 600VDC 공급 전압 과다</b><br>✅ 조치: 전원 공급 장치 점검 및 매뉴얼 참조", en: "⚠️ <b>Error: BTMS 2 600VDC supply overvoltage</b><br>✅ Action: Overvoltage on 600V supply. Check power supply." },
+        "279": { ko: "⚠️ <b>오류: BTMS 2 24VDC 공급 전압 부족</b><br>✅ 조치: 전원 공급 장치 점검 및 매뉴얼 참조", en: "⚠️ <b>Error: BTMS 2 24VDC supply undervoltage</b><br>✅ Action: Undervoltage on 24V supply. Check power supply." },
+        "280": { ko: "⚠️ <b>오류: BTMS 2 24VDC 공급 전압 과다</b><br>✅ 조치: 전원 공급 장치 점검 및 매뉴얼 참조", en: "⚠️ <b>Error: BTMS 2 24VDC supply overvoltage</b><br>✅ Action: Overvoltage on 24V supply. Check power supply." },
+        "281": { ko: "⚠️ <b>오류: BTMS 2 컴프레서 오류</b><br>✅ 조치: 전원 및 모듈 점검, AGV 재시작", en: "⚠️ <b>Error: BTMS 2 compressor error</b><br>✅ Action: Fault with compressor. Check power supply/module." },
+        "282": { ko: "⚠️ <b>오류: BTMS 2 워터 펌프 오류</b><br>✅ 조치: 전원 및 모듈 점검, 매뉴얼 참조", en: "⚠️ <b>Error: BTMS 2 water pump error</b><br>✅ Action: Error with water pump. Check power supply/module." },
+        "283": { ko: "⚠️ <b>오류: BTMS 2 냉각 시스템 압력 오류</b><br>✅ 조치: 가스 압력 점검 및 보정", en: "⚠️ <b>Error: BTMS 2 cooling system pressure error</b><br>✅ Action: Unwanted pressure on cooling system. Check gas pressure." },
+        "284": { ko: "⚠️ <b>오류: BTMS 2 제상 센서 오류</b><br>✅ 조치: 전원 및 모듈 점검, AGV 재시작", en: "⚠️ <b>Error: BTMS 2 sensor defrost error</b><br>✅ Action: Fault on defrost sensor. Check power supply/module." },
+        "285": { ko: "⚠️ <b>오류: BTMS 2 CAN 통신 오류</b><br>✅ 조치: CAN 버스 및 모듈 점검", en: "⚠️ <b>Error: BTMS 2 CAN communication error</b><br>✅ Action: No CAN report from BMS. Check CAN bus/wiring." },
+        "286": { ko: "⚠️ <b>오류: BTMS 2 냉각수 출구 온도 센서 오류</b><br>✅ 조치: 전원 및 모듈 점검", en: "⚠️ <b>Error: BTMS 2 sensor temperature outgoing coolant error</b><br>✅ Action: Error on outgoing coolant temp sensor. Check power/module." },
+        "287": { ko: "⚠️ <b>오류: BTMS 2 냉각수 입구 온도 센서 오류</b><br>✅ 조치: 전원 및 모듈 점검, AGV 재시작", en: "⚠️ <b>Error: BTMS 2 sensor temperature incoming coolant error</b><br>✅ Action: Error on incoming coolant temp sensor. Check power/module." },
+        "288": { ko: "⚠️ <b>오류: BTMS 2 냉각수 수위 낮음</b><br>✅ 조치: 냉각수 보충", en: "⚠️ <b>Error: BTMS 2 coolant level low</b><br>✅ Action: Low coolant level. Top up tank." },
+        "289": { ko: "⚠️ <b>오류: BTMS 2 PTC 또는 히터 오류</b><br>✅ 조치: 전원 및 모듈 점검", en: "⚠️ <b>Error: BTMS 2 PTC or heater error</b><br>✅ Action: Abnormal function of PTC/heater. Check power/module." },
+        "290": { ko: "⚠️ <b>오류: BTMS 2 팬 오류</b><br>✅ 조치: 전원 및 모듈 점검", en: "⚠️ <b>Error: BTMS 2 fan error</b><br>✅ Action: Fault with fan. Check power supply/module." },
+        "291": { ko: "⚠️ <b>오류: BTMS 2 릴레이 접착 오류</b><br>✅ 조치: 전원 및 모듈 점검", en: "⚠️ <b>Error: BTMS 2 relay bonding error</b><br>✅ Action: Fault with closing power supply relay. Check power/module." },
+        "292": { ko: "⚠️ <b>오류: BTMS 2 PTC CAN 통신 오류</b><br>✅ 조치: 전원 및 모듈 점검", en: "⚠️ <b>Error: BTMS 2 PTC CAN communication error</b><br>✅ Action: Communication fault with PTC unit. Check power/module." },
+        "293": { ko: "⚠️ <b>오류: BTMS 2 CMP CAN 통신 오류</b><br>✅ 조치: 전원 및 모듈 점검", en: "⚠️ <b>Error: BTMS 2 CMP CAN communication error</b><br>✅ Action: Communication fault with compressor unit. Check power/module." },
+        "294": { ko: "⚠️ <b>오류: BTMS 2 동결 보호 동작</b><br>✅ 조치: 냉각수 온도 확인", en: "⚠️ <b>Error: BTMS 2 freezing protection</b><br>✅ Action: Low coolant temperature. Check coolant temperature." },
+        "295": { ko: "⚠️ <b>오류: BTMS 2 배기 온도 센서 오류</b><br>✅ 조치: 냉각수 온도, 수위, 순환 상태 점검", en: "⚠️ <b>Error: BTMS 2 sensor temperature exhaust error</b><br>✅ Action: Exhaust temp too high. Check cooling water/circulation." },
+        "296": { ko: "⚠️ <b>오류: BTMS 2 배기 온도 보호 동작</b><br>✅ 조치: 냉각수 점검 및 AGV 재시작 (시스템 셧다운됨)", en: "⚠️ <b>Error: BTMS 2 exhaust temperature protection</b><br>✅ Action: Outlet temp protected. System shut down. Check cooling." },
+        "297": { ko: "⚠️ <b>오류: BTMS 2 프리차징 실패</b><br>✅ 조치: 전원 및 프리차지 회로 점검", en: "⚠️ <b>Error: BTMS 2 pre-charging failure</b><br>✅ Action: Pre-charging failed. Check power supply/pre-charge circuit." },
+        "298": { ko: "⚠️ <b>오류: BTMS 2 고전압 역연결 오류</b><br>✅ 조치: 전원 공급 및 연결 상태 점검", en: "⚠️ <b>Error: BTMS 2 HV reverse connection fault</b><br>✅ Action: High voltage connection fault. Check power supply/connection." },
+        "299": { ko: "⚠️ <b>오류: BTMS 2 주변 온도 센서 오류</b><br>✅ 조치: 배선 및 센서 기능 점검", en: "⚠️ <b>Error: BTMS 2 ambient temperature sensor failure</b><br>✅ Action: Fault on ambient temp sensor. Check wiring/sensor." },
+        "300": { ko: "⚠️ <b>오류: BTMS 2 고압 센서 연결 끊김</b><br>✅ 조치: 배선, 커넥터, 센서 기능 점검", en: "⚠️ <b>Error: BTMS 2 high pressure sensor disconnected</b><br>✅ Action: High pressure not connected. Check wiring/connector." },
+        "301": { ko: "⚠️ <b>오류: BTMS 1 프리차징 실패</b><br>✅ 조치: 전원 및 프리차지 회로 점검", en: "⚠️ <b>Error: BTMS 1 pre-charging failure</b><br>✅ Action: Pre-charging failed. Check power supply/pre-charge circuit." },
+        "302": { ko: "⚠️ <b>오류: BTMS 1 고전압 역연결 오류</b><br>✅ 조치: 전원 공급 및 연결 상태 점검", en: "⚠️ <b>Error: BTMS 1 HV reverse connection fault</b><br>✅ Action: High voltage connection fault. Check power supply/connection." },
+        "303": { ko: "⚠️ <b>오류: BTMS 1 주변 온도 센서 오류</b><br>✅ 조치: 배선 및 센서 기능 점검", en: "⚠️ <b>Error: BTMS 1 ambient temperature sensor failure</b><br>✅ Action: Fault on ambient temp sensor. Check wiring/sensor." },
+        "304": { ko: "⚠️ <b>오류: BTMS 1 고압 센서 연결 끊김</b><br>✅ 조치: 배선, 커넥터, 센서 기능 점검", en: "⚠️ <b>Error: BTMS 1 high pressure sensor disconnected</b><br>✅ Action: High pressure not connected. Check wiring/connector." },
+        "349": { ko: "⚠️ <b>오류: 전방 좌측 조향 각도 한계 초과</b><br>✅ 조치: 조향 각도, 차축 손상 점검 및 정렬 보정", en: "⚠️ <b>Error: Steering angle encoder front left exceeds limit</b><br>✅ Action: Front left angle > max possible. Check angle, axle, alignment." },
+        "350": { ko: "⚠️ <b>오류: 후방 좌측 조향 각도 한계 초과</b><br>✅ 조치: 조향 각도, 차축 손상 점검 및 정렬 보정", en: "⚠️ <b>Error: Steering angle encoder rear left exceeds limit</b><br>✅ Action: Rear left angle > max possible. Check angle, axle, alignment." },
+        "351": { ko: "⚠️ <b>오류: 전방 우측 조향 각도 한계 초과</b><br>✅ 조치: 조향 각도, 차축 손상 점검 및 정렬 보정", en: "⚠️ <b>Error: Steering angle encoder front right exceeds limit</b><br>✅ Action: Front right angle > max possible. Check angle, axle, alignment." },
+        "352": { ko: "⚠️ <b>오류: 후방 우측 조향 각도 한계 초과</b><br>✅ 조치: 조향 각도, 차축 손상 점검 및 정렬 보정", en: "⚠️ <b>Error: Steering angle encoder rear right exceeds limit</b><br>✅ Action: Rear right angle > max possible. Check angle, axle, alignment." },
+        "353": { ko: "⚠️ <b>오류: 전방 조향 엔코더 간 차이 과다</b><br>✅ 조치: 조향 각도, 차축 손상, 정렬 점검 및 CAN 통신 확인", en: "⚠️ <b>Error: Steering angle encoders front difference too high</b><br>✅ Action: Front axle encoders diff too large. Check angles, axle, CAN bus." },
+        "354": { ko: "⚠️ <b>오류: 후방 조향 엔코더 간 차이 과다</b><br>✅ 조치: 조향 각도, 차축 손상, 정렬 점검 및 CAN 통신 확인", en: "⚠️ <b>Error: Steering angle encoders rear difference too high</b><br>✅ Action: Rear axle encoders diff too large. Check angles, axle, CAN bus." },
+        "355": { ko: "⚠️ <b>오류: 전방 조향 엔코더 양쪽 오류</b><br>✅ 조치: 조향 각도, 차축 손상, CAN 통신 점검", en: "⚠️ <b>Error: Steering angle encoders front both error</b><br>✅ Action: Both front encoders error. Check angle, axle, CAN bus." },
+        "356": { ko: "⚠️ <b>오류: 후방 조향 엔코더 양쪽 오류</b><br>✅ 조치: 조향 각도, 차축 손상, CAN 통신 점검", en: "⚠️ <b>Error: Steering angle encoders rear both error</b><br>✅ Action: Both rear encoders error. Check angle, axle, CAN bus." },
+        "359": { ko: "⚠️ <b>오류: 조향용 유압 압력 부족</b><br>✅ 조치: 유압 시스템(펌프, 인버터, 누유, 센서 등) 점검", en: "⚠️ <b>Error: Hydraulic oil pressure insufficient too steer</b><br>✅ Action: Hydraulic pressure too low for steering. Check hydraulic system." },
+        "361": { ko: "⚠️ <b>오류: 전방 조향 밸브 오작동 (잘못된 밸브 활성)</b><br>✅ 조치: 모듈 기능 및 배선 점검", en: "⚠️ <b>Error: Valve steering front wrong one active</b><br>✅ Action: Wrong valve for front steering active. Check modules." },
+        "362": { ko: "⚠️ <b>오류: 후방 조향 밸브 오작동 (잘못된 밸브 활성)</b><br>✅ 조치: 모듈 기능 및 배선 점검", en: "⚠️ <b>Error: Valve steering rear wrong one active</b><br>✅ Action: Wrong valve for rear steering active. Check modules." },
+        "363": { ko: "⚠️ <b>오류: 자동 그리스 윤활 시스템 수위 낮음</b><br>✅ 조치: 그리스 보충", en: "⚠️ <b>Error: Grease lubrication system grease level low</b><br>✅ Action: Grease level low. Top up reservoir." },
+        "366": { ko: "⚠️ <b>오류: 유압 브레이크 압력 센서 오류</b><br>✅ 조치: VCU 배선 및 시스템 점검, AGV 재시작", en: "⚠️ <b>Error: Hydraulic oil sensor brake pressure error</b><br>✅ Action: Fault on brake pressure sensor feedback. Check wiring/system." },
+        "367": { ko: "⚠️ <b>오류: 비례 제동 밸브 오류</b><br>✅ 조치: VCU 배선 및 시스템 점검, AGV 재시작", en: "⚠️ <b>Error: Valve proportional braking error</b><br>✅ Action: Fault on proportional braking valve. Check wiring/system." },
+        "368": { ko: "⚠️ <b>오류: 핸드브레이크 밸브 오류</b><br>✅ 조치: VCU 배선 및 시스템 점검, AGV 재시작", en: "⚠️ <b>Error: Valve handbrake error</b><br>✅ Action: Fault on handbrake valve. Check wiring/system." },
+        "381": { ko: "⚠️ <b>오류: 유압 오일 온도 낮음</b><br>✅ 조치: 유압 오일 순환 점검 및 예열 시도", en: "⚠️ <b>Error: Hydraulic oil temperature low</b><br>✅ Action: Hydraulic oil temp too low. Check circulation/heat up." },
+        "372": { ko: "⚠️ <b>오류: AGV 가변 제동 활성화</b><br>✅ 조치: 빈번 발생 시 브레이크 마모 및 배터리 결함 점검", en: "⚠️ <b>Error: AGV proportional braking active</b><br>✅ Action: Battery cannot absorb energy, mech brakes used. Check brakes/battery." },
+        "373": { ko: "⚠️ <b>오류: 비상 정지 활성화</b><br>✅ 조치: 비상 정지 원인 및 신호 손실 확인, 리셋", en: "⚠️ <b>Error: Emergency stop active</b><br>✅ Action: Emergency stop signal failed. Check reason/signal loss." },
+        "377": { ko: "⚠️ <b>오류: 아이솔레이션 모니터링 경고</b><br>✅ 조치: 600V 시스템 절연 값 점검 및 손상 부품 교체", en: "⚠️ <b>Error: Isolation monitoring warning</b><br>✅ Action: Isolation value below warning limit. Check insulation/damage." },
+        "378": { ko: "⚠️ <b>오류: 아이솔레이션 모니터링 오류</b><br>✅ 조치: AGV 사용 중지, 600V 시스템 절연 값 점검 및 수리", en: "⚠️ <b>Error: Isolation monitoring error</b><br>✅ Action: Isolation value below error limit. Switch off 600V, check insulation." },
+        "379": { ko: "⚠️ <b>오류: 유압 오일 압력 너무 높음</b><br>✅ 조치: 유압 시스템(펌프, 센서, 밸브 등) 점검", en: "⚠️ <b>Error: Hydraulic oil pressure too high</b><br>✅ Action: Hydraulic pressure too high. Check hydraulic system." },
+        "400": { ko: "⚠️ <b>오류: 전방 주행 인버터 비상 정지 입력</b><br>✅ 조치: 비상 정지 원인 확인 및 매뉴얼 참조", en: "⚠️ <b>Error: Traction inverter front emergency stop</b><br>✅ Action: Inverter emergency stop input activated. Check cause." },
+        "401": { ko: "⚠️ <b>오류: 전방 주행 인버터 펌웨어 오류</b><br>✅ 조치: 파라미터 초기화 또는 펌웨어 재설치", en: "⚠️ <b>Error: Traction inverter front firmware error</b><br>✅ Action: Firmware error. Reset parameters or reinstall firmware." },
+        "402": { ko: "⚠️ <b>오류: 전방 주행 인버터 신호 오류</b><br>✅ 조치: 진단 도구 및 매뉴얼 참조 (제조사 문의)", en: "⚠️ <b>Error: Traction inverter front signal access error</b><br>✅ Action: Signal error. Refer to diagnostic tools." },
+        "403": { ko: "⚠️ <b>오류: 전방 주행 인버터 CPU 부하 과다</b><br>✅ 조치: 진단 도구 및 매뉴얼 참조", en: "⚠️ <b>Error: Traction inverter front CPU load too high</b><br>✅ Action: Excessive CPU load. Refer to diagnostic tools." },
+        "404": { ko: "⚠️ <b>오류: 전방 주행 인버터 통신 타임아웃</b><br>✅ 조치: CAN 버스, 배선, 모듈 점검", en: "⚠️ <b>Error: Traction inverter front communication timeout</b><br>✅ Action: CAN communication timeout from VCU. Check CAN bus." },
+        "406": { ko: "⚠️ <b>오류: 전방 주행 인버터 외부 온도 오류</b><br>✅ 조치: 인버터 온도, 냉각수 점검 및 냉각", en: "⚠️ <b>Error: Traction inverter front external temperature error</b><br>✅ Action: External sensor temp too high. Check temp/coolant." },
+        "407": { ko: "⚠️ <b>오류: 전방 주행 인버터 하드웨어 오류</b><br>✅ 조치: 심각한 하드웨어 결함 가능성, 사용 전 점검 필수", en: "⚠️ <b>Error: Traction inverter front hardware error</b><br>✅ Action: Hardware error. Inspect inverter before restart." },
+        "408": { ko: "⚠️ <b>오류: 전방 주행 인버터 DC 링크 과전압</b><br>✅ 조치: DC 링크 점검 및 매뉴얼 참조", en: "⚠️ <b>Error: Traction inverter front DCLink overvoltage</b><br>✅ Action: DC link voltage > upper limit. Check DC link." },
+        "409": { ko: "⚠️ <b>오류: 전방 주행 인버터 DC 링크 저전압</b><br>✅ 조치: DC 링크 점검 및 매뉴얼 참조", en: "⚠️ <b>Error: Traction inverter front DCLink undervoltage</b><br>✅ Action: DC link voltage < lower limit. Check DC link." },
+        "410": { ko: "⚠️ <b>오류: 전방 주행 인버터 애플리케이션 오류</b><br>✅ 조치: 시스템 파라미터 및 CAN 통신 점검", en: "⚠️ <b>Error: Traction inverter front application error</b><br>✅ Action: Application error. Check parameters/CAN bus." },
+        "411": { ko: "⚠️ <b>오류: 전방 주행 인버터 외부 온도 센서 오류</b><br>✅ 조치: 진단 도구 및 매뉴얼 참조", en: "⚠️ <b>Error: Traction inverter front external temperature sensor error</b><br>✅ Action: Circuit fault on external temp sensor. Refer to diagnostic tools." },
+        "412": { ko: "⚠️ <b>오류: 전방 주행 인버터 하드웨어 과전류</b><br>✅ 조치: 시스템 동작, 배선 점검 (심각한 오류 가능성)", en: "⚠️ <b>Error: Traction inverter front hardware overcurrent</b><br>✅ Action: Overcurrent on phase. Check wiring/system." },
+        "413": { ko: "⚠️ <b>오류: 전방 주행 인버터 단락 (Short Circuit)</b><br>✅ 조치: 모터 배선, 위상 케이블 점검 (하드웨어 문제)", en: "⚠️ <b>Error: Traction inverter front short circuit</b><br>✅ Action: Short circuit on phase. Check wiring/motor/inverter." },
+        "414": { ko: "⚠️ <b>오류: 전방 주행 인버터 브리지 오류</b><br>✅ 조치: 모터 배선, 위상 케이블 점검 (사용 중지 및 점검)", en: "⚠️ <b>Error: Traction inverter front inverter bridge error</b><br>✅ Action: Both bridges closed same time. Hardware problem. Inspect inverter." },
+        "415": { ko: "⚠️ <b>오류: 전방 주행 인버터 과열</b><br>✅ 조치: 인버터 온도, 냉각수 점검 및 냉각", en: "⚠️ <b>Error: Traction inverter front inverter overtemperature</b><br>✅ Action: IGBT temp too high. Check temp/coolant." },
+        "416": { ko: "⚠️ <b>오류: 전방 주행 인버터 소프트웨어 과전류</b><br>✅ 조치: 시스템 동작, 배선 점검", en: "⚠️ <b>Error: Traction inverter front software overcurrent</b><br>✅ Action: Phase current > max value. Check wiring/system." },
+        "417": { ko: "⚠️ <b>오류: 전방 주행 인버터 과속</b><br>✅ 조치: 진단 도구 및 매뉴얼 참조", en: "⚠️ <b>Error: Traction inverter front overspeed</b><br>✅ Action: Motor speed out of range. Refer to diagnostic tools." },
+        "418": { ko: "⚠️ <b>오류: 전방 주행 인버터 주파수 과다</b><br>✅ 조치: 진단 도구 및 매뉴얼 참조", en: "⚠️ <b>Error: Traction inverter front overfrequency</b><br>✅ Action: Output frequency > limit. Refer to diagnostic tools." },
+        "419": { ko: "⚠️ <b>오류: 전방 주행 인버터 위상 손실</b><br>✅ 조치: 배선 및 전원 케이블 연결 상태 점검", en: "⚠️ <b>Error: Traction inverter front phase loss</b><br>✅ Action: Phase current imbalance. Check wiring/power cables." },
+        "420": { ko: "⚠️ <b>오류: 전방 주행 인버터 접지 오류</b><br>✅ 조치: 진단 도구 및 매뉴얼 참조", en: "⚠️ <b>Error: Traction inverter front earth error</b><br>✅ Action: Total output current > max value. Refer to diagnostic tools." },
+        "421": { ko: "⚠️ <b>오류: 전방 주행 인버터 병렬 통신 오류</b><br>✅ 조치: SYNC 링크 배선, 차폐, 접지 점검", en: "⚠️ <b>Error: Traction inverter front parallel communication error</b><br>✅ Action: SYNC link error. Check SYNC wiring/shielding." },
+        "422": { ko: "⚠️ <b>오류: 전방 주행 인버터 리졸버 오류</b><br>✅ 조치: 리졸버 배선 점검 및 센서 재보정", en: "⚠️ <b>Error: Traction inverter front resolver error</b><br>✅ Action: Resolver error. Check wiring/parameters." },
+        "423": { ko: "⚠️ <b>오류: 후방 주행 인버터 비상 정지 입력</b><br>✅ 조치: 비상 정지 원인 확인 및 매뉴얼 참조", en: "⚠️ <b>Error: Traction inverter rear emergency stop</b><br>✅ Action: Inverter emergency stop input activated. Check cause." },
+        "424": { ko: "⚠️ <b>오류: 후방 주행 인버터 펌웨어 오류</b><br>✅ 조치: 파라미터 초기화 또는 펌웨어 재설치", en: "⚠️ <b>Error: Traction inverter rear firmware error</b><br>✅ Action: Firmware error. Reset parameters or reinstall firmware." },
+        "425": { ko: "⚠️ <b>오류: 후방 주행 인버터 신호 오류</b><br>✅ 조치: 진단 도구 및 매뉴얼 참조 (제조사 문의)", en: "⚠️ <b>Error: Traction inverter rear signal access error</b><br>✅ Action: Signal error. Refer to diagnostic tools." },
+        "426": { ko: "⚠️ <b>오류: 후방 주행 인버터 CPU 부하 과다</b><br>✅ 조치: 진단 도구 및 매뉴얼 참조", en: "⚠️ <b>Error: Traction inverter rear CPU load too high</b><br>✅ Action: Excessive CPU load. Refer to diagnostic tools." },
+        "427": { ko: "⚠️ <b>오류: 후방 주행 인버터 통신 타임아웃</b><br>✅ 조치: CAN 버스, 배선, 모듈 점검", en: "⚠️ <b>Error: Traction inverter rear communication timeout</b><br>✅ Action: CAN communication timeout from VCU. Check CAN bus." },
+        "429": { ko: "⚠️ <b>오류: 후방 주행 인버터 외부 온도 오류</b><br>✅ 조치: 인버터 온도, 냉각수 점검 및 냉각", en: "⚠️ <b>Error: Traction inverter rear external temperature error</b><br>✅ Action: External sensor temp too high. Check temp/coolant." },
+        "430": { ko: "⚠️ <b>오류: 후방 주행 인버터 하드웨어 오류</b><br>✅ 조치: 심각한 하드웨어 결함 가능성, 사용 전 점검 필수", en: "⚠️ <b>Error: Traction inverter rear hardware error</b><br>✅ Action: Hardware error. Inspect inverter before restart." },
+        "431": { ko: "⚠️ <b>오류: 후방 주행 인버터 DC 링크 과전압</b><br>✅ 조치: DC 링크 점검 및 매뉴얼 참조", en: "⚠️ <b>Error: Traction inverter rear DCLink overvoltage</b><br>✅ Action: DC link voltage > upper limit. Check DC link." },
+        "432": { ko: "⚠️ <b>오류: 후방 주행 인버터 DC 링크 저전압</b><br>✅ 조치: DC 링크 점검 및 매뉴얼 참조", en: "⚠️ <b>Error: Traction inverter rear DCLink undervoltage</b><br>✅ Action: DC link voltage < lower limit. Check DC link." },
+        "433": { ko: "⚠️ <b>오류: 후방 주행 인버터 애플리케이션 오류</b><br>✅ 조치: 시스템 파라미터 및 CAN 통신 점검", en: "⚠️ <b>Error: Traction inverter rear application error</b><br>✅ Action: Application error. Check parameters/CAN bus." },
+        "434": { ko: "⚠️ <b>오류: 후방 주행 인버터 외부 온도 센서 오류</b><br>✅ 조치: 진단 도구 및 매뉴얼 참조", en: "⚠️ <b>Error: Traction inverter rear external temperature sensor error</b><br>✅ Action: Circuit fault on external temp sensor. Refer to diagnostic tools." },
+        "435": { ko: "⚠️ <b>오류: 후방 주행 인버터 하드웨어 과전류</b><br>✅ 조치: 시스템 동작, 배선 점검 (심각한 오류 가능성)", en: "⚠️ <b>Error: Traction inverter rear hardware overcurrent</b><br>✅ Action: Overcurrent on phase. Check wiring/system." },
+        "436": { ko: "⚠️ <b>오류: 후방 주행 인버터 단락 (Short Circuit)</b><br>✅ 조치: 모터 배선, 위상 케이블 점검 (하드웨어 문제)", en: "⚠️ <b>Error: Traction inverter rear short circuit</b><br>✅ Action: Short circuit on phase. Check wiring/motor/inverter." },
+        "437": { ko: "⚠️ <b>오류: 후방 주행 인버터 브리지 오류</b><br>✅ 조치: 모터 배선, 위상 케이블 점검 (사용 중지 및 점검)", en: "⚠️ <b>Error: Traction inverter rear inverter bridge error</b><br>✅ Action: Both bridges closed same time. Hardware problem. Inspect inverter." },
+        "438": { ko: "⚠️ <b>오류: 후방 주행 인버터 과열</b><br>✅ 조치: 인버터 온도, 냉각수 점검 및 냉각", en: "⚠️ <b>Error: Traction inverter rear inverter overtemperature</b><br>✅ Action: IGBT temp too high. Check temp/coolant." },
+        "439": { ko: "⚠️ <b>오류: 후방 주행 인버터 소프트웨어 과전류</b><br>✅ 조치: 시스템 동작, 배선 점검", en: "⚠️ <b>Error: Traction inverter rear software overcurrent</b><br>✅ Action: Phase current > max value. Check wiring/system." },
+        "440": { ko: "⚠️ <b>오류: 후방 주행 인버터 과속</b><br>✅ 조치: 진단 도구 및 매뉴얼 참조", en: "⚠️ <b>Error: Traction inverter rear overspeed</b><br>✅ Action: Motor speed out of range. Refer to diagnostic tools." },
+        "441": { ko: "⚠️ <b>오류: 후방 주행 인버터 주파수 과다</b><br>✅ 조치: 진단 도구 및 매뉴얼 참조", en: "⚠️ <b>Error: Traction inverter rear overfrequency</b><br>✅ Action: Output frequency > limit. Refer to diagnostic tools." },
+        "442": { ko: "⚠️ <b>오류: 후방 주행 인버터 위상 손실</b><br>✅ 조치: 배선 및 전원 케이블 연결 상태 점검", en: "⚠️ <b>Error: Traction inverter rear phase loss</b><br>✅ Action: Phase current imbalance. Check wiring/power cables." },
+        "443": { ko: "⚠️ <b>오류: 후방 주행 인버터 접지 오류</b><br>✅ 조치: 진단 도구 및 매뉴얼 참조", en: "⚠️ <b>Error: Traction inverter rear earth error</b><br>✅ Action: Total output current > max value. Refer to diagnostic tools." },
+        "444": { ko: "⚠️ <b>오류: 후방 주행 인버터 병렬 통신 오류</b><br>✅ 조치: SYNC 링크 배선, 차폐, 접지 점검", en: "⚠️ <b>Error: Traction inverter rear parallel communication error</b><br>✅ Action: SYNC link error. Check SYNC wiring/shielding." },
+        "445": { ko: "⚠️ <b>오류: 후방 주행 인버터 리졸버 오류</b><br>✅ 조치: 리졸버 배선 점검 및 센서 재보정", en: "⚠️ <b>Error: Traction inverter rear resolver error</b><br>✅ Action: Resolver error. Check wiring/parameters." },
+        "496": { ko: "⚠️ <b>오류: 배터리 메인 컨택터 1 닫힘 고착</b><br>✅ 조치: 전원 및 모듈 점검 (열려 있어야 함)", en: "⚠️ <b>Error: Battery main contactor 1 stuck closed</b><br>✅ Action: Contactor 1 closed when should be open. Check power supply/module." },
+        "497": { ko: "⚠️ <b>오류: 배터리 메인 컨택터 2 닫힘 고착</b><br>✅ 조치: 전원 및 모듈 점검 (열려 있어야 함)", en: "⚠️ <b>Error: Battery main contactor 2 stuck closed</b><br>✅ Action: Contactor 2 closed when should be open. Check power supply/module." },
+        "498": { ko: "⚠️ <b>오류: 배터리 메인 컨택터 3 닫힘 고착</b><br>✅ 조치: 전원 및 모듈 점검 (열려 있어야 함)", en: "⚠️ <b>Error: Battery main contactor 3 stuck closed</b><br>✅ Action: Contactor 3 closed when should be open. Check power supply/module." },
+        "499": { ko: "⚠️ <b>오류: 배터리 메인 컨택터 4 닫힘 고착</b><br>✅ 조치: 전원 및 모듈 점검 (열려 있어야 함)", en: "⚠️ <b>Error: Battery main contactor 4 stuck closed</b><br>✅ Action: Contactor 4 closed when should be open. Check power supply/module." },
+        "502": { ko: "⚠️ <b>오류: 배터리 스트링 3 작동 불가</b><br>✅ 조치: BMS에 의해 비활성화됨, 진단 도구 참조", en: "⚠️ <b>Error: Battery string 3 does not work</b><br>✅ Action: String 3 disabled by BMS. Refer to diagnostic tools." },
+        "503": { ko: "⚠️ <b>오류: 배터리 스트링 4 작동 불가</b><br>✅ 조치: BMS에 의해 비활성화됨, 진단 도구 참조", en: "⚠️ <b>Error: Battery string 4 does not work</b><br>✅ Action: String 4 disabled by BMS. Refer to diagnostic tools." },
+        "504": { ko: "⚠️ <b>오류: 배터리 셀 전압 과다 (치명적)</b><br>✅ 조치: 배터리 시스템 셧다운, 안전 레벨까지 방전", en: "⚠️ <b>Error: Battery cell voltage too high critical</b><br>✅ Action: Cell voltage too high. Battery shutdown. Discharge to safe level." },
+        "505": { ko: "⚠️ <b>오류: 배터리 셀 전압 과다</b><br>✅ 조치: 충전 제한(0%), 안전 레벨까지 방전", en: "⚠️ <b>Error: Battery cell voltage too high</b><br>✅ Action: Cell voltage too high. Charge power 0%. Discharge to safe level." },
+        "506": { ko: "⚠️ <b>오류: 배터리 셀 전압 높음</b><br>✅ 조치: 충전 제한(50%), 충전 세션 종료 및 방전 필요", en: "⚠️ <b>Error: Battery cell voltage high</b><br>✅ Action: Cell voltage high. Charge power 50%. Discharge to safe level." },
+        "507": { ko: "⚠️ <b>오류: 배터리 셀 전압 너무 낮음</b><br>✅ 조치: 해당 배터리 서브시스템 셧다운, 충전 필요", en: "⚠️ <b>Error: Battery cell voltage too low</b><br>✅ Action: Cell voltage too low. Subsystem shutdown. Charge to safe level." },
+        "508": { ko: "⚠️ <b>오류: 배터리 셀 전압 낮음</b><br>✅ 조치: 방전 제한(50%), 안전 레벨까지 충전", en: "⚠️ <b>Error: Battery cell voltage low</b><br>✅ Action: Cell voltage low. Discharge power 50%. Charge to safe level." },
+        "509": { ko: "⚠️ <b>오류: 배터리 셀 온도 너무 높음</b><br>✅ 조치: 배터리 시스템 셧다운, 냉각 및 열폭주 점검", en: "⚠️ <b>Error: Battery cell temperature too high</b><br>✅ Action: Cell temp too high. Shutdown. Cool down/check thermal runaway." },
+        "510": { ko: "⚠️ <b>오류: 배터리 셀 밸런스 차이 과다</b><br>✅ 조치: 배터리 출력 제한(50%), 진단 도구 참조", en: "⚠️ <b>Error: Battery cell balance difference too high</b><br>✅ Action: Cell voltage diff too high. Power limited 50%." },
+        "511": { ko: "⚠️ <b>오류: 배터리 셀 온도 높음</b><br>✅ 조치: 충전 제한(50%), 냉각 및 열폭주 점검", en: "⚠️ <b>Error: Battery cell temperature high</b><br>✅ Action: Cell temp high. Charge power 50%. Cool down/check thermal runaway." },
+        "512": { ko: "⚠️ <b>오류: 배터리 팩 전압 너무 높음</b><br>✅ 조치: 배터리 셧다운, 안전 레벨까지 방전", en: "⚠️ <b>Error: Battery pack voltage too high</b><br>✅ Action: Pack voltage too high. Shutdown. Discharge to safe level." },
+        "513": { ko: "⚠️ <b>오류: 배터리 팩 전압 높음</b><br>✅ 조치: 충전 제한(50%), 안전 레벨까지 방전", en: "⚠️ <b>Error: Battery pack voltage high</b><br>✅ Action: Pack voltage high. Charge power 50%. Discharge to safe level." },
+        "514": { ko: "⚠️ <b>오류: 배터리 팩 전압 너무 낮음</b><br>✅ 조치: 방전 제한(0%), 배터리 셧다운, 안전 레벨까지 충전", en: "⚠️ <b>Error: Battery pack voltage too low</b><br>✅ Action: Pack voltage too low. Discharge 0%/Shutdown. Discharge to safe level." },
+        "515": { ko: "⚠️ <b>오류: 배터리 팩 전압 낮음</b><br>✅ 조치: 방전 제한(50%), 안전 레벨까지 충전", en: "⚠️ <b>Error: Battery pack voltage low</b><br>✅ Action: Pack voltage low. Discharge power 50%. Discharge to safe level." },
+        "516": { ko: "⚠️ <b>오류: 배터리 방전 전류 너무 높음</b><br>✅ 조치: 방전 제한(0%), 시스템 손상 및 퓨즈 점검", en: "⚠️ <b>Error: Battery discharge current too high</b><br>✅ Action: Discharge current too high. Discharge 0%. Check system/fuses." },
+        "517": { ko: "⚠️ <b>오류: 배터리 방전 전류 높음</b><br>✅ 조치: 방전 제한(50%), 시스템 손상 및 퓨즈 점검", en: "⚠️ <b>Error: Battery discharge current high</b><br>✅ Action: Discharge current high. Discharge 50%. Check system/fuses." },
+        "518": { ko: "⚠️ <b>오류: 배터리 회생 전류 너무 높음</b><br>✅ 조치: 충전 제한(0%), 시스템 손상 및 퓨즈 점검", en: "⚠️ <b>Error: Battery regenerative current too high</b><br>✅ Action: Regen current too high. Charge 0%. Check system/fuses." },
+        "519": { ko: "⚠️ <b>오류: 배터리 회생 전류 높음</b><br>✅ 조치: 충전 제한(50%), 시스템 손상 및 퓨즈 점검", en: "⚠️ <b>Error: Battery regenerative current high</b><br>✅ Action: Regen current high. Charge 50%. Check system/fuses." },
+        "520": { ko: "⚠️ <b>오류: 배터리 충전 전류 너무 높음</b><br>✅ 조치: 충전 제한(0%), 시스템 손상 및 퓨즈 점검", en: "⚠️ <b>Error: Battery charge current too high</b><br>✅ Action: Charge current too high. Charge 0%. Check system/fuses." },
+        "521": { ko: "⚠️ <b>오류: 배터리 충전 전류 높음</b><br>✅ 조치: 충전 제한(50%), 시스템 손상 및 퓨즈 점검", en: "⚠️ <b>Error: Battery charge current high</b><br>✅ Action: Charge current high. Charge 50%. Check system/fuses." },
+        "522": { ko: "⚠️ <b>오류: 배터리 셀 온도 차이 높음</b><br>✅ 조치: 배터리 출력 제한(50%), 진단 도구 참조", en: "⚠️ <b>Error: Battery cell temperature difference high</b><br>✅ Action: Cell temp diff too high. Power limited 50%." },
+        "523": { ko: "⚠️ <b>오류: 배터리 HV 연결 오류 (스트링 불균형)</b><br>✅ 조치: 고전압 케이블 및 연결 상태 점검", en: "⚠️ <b>Error: Battery HV connection error</b><br>✅ Action: Uneven load balance. Check HV cabling." },
+        "524": { ko: "⚠️ <b>오류: 배터리 MMU-SBMU 통신 오류</b><br>✅ 조치: CAN 버스 및 배터리 시스템 구성 요소 점검", en: "⚠️ <b>Error: Battery MMU SBMU communication error</b><br>✅ Action: Comm fault MMU-SBMU. Check CAN bus/wiring." },
+        "525": { ko: "⚠️ <b>오류: 배터리 SBMU-MBMU 통신 오류</b><br>✅ 조치: CAN 버스 및 배터리 시스템 구성 요소 점검", en: "⚠️ <b>Error: Battery SBMU MBMU communication error</b><br>✅ Action: Comm fault SBMU-MBMU. Check CAN bus/wiring." },
+        "526": { ko: "⚠️ <b>오류: 배터리 VCU-MBMU 통신 오류</b><br>✅ 조치: CAN 버스 및 구성 요소 점검 (배터리 셧다운)", en: "⚠️ <b>Error: Battery VCU MBMU communication error</b><br>✅ Action: Comm fault MBMU-VCU. Battery shutdown. Check CAN bus." },
+        "527": { ko: "⚠️ <b>오류: 배터리 BTMS 오류</b><br>✅ 조치: BTMS 모듈 기능 점검 (심각한 오류 보고됨)", en: "⚠️ <b>Error: Battery BTMS error</b><br>✅ Action: BTMS severe error/comm error. Check module." },
+        "528": { ko: "⚠️ <b>오류: 배터리 절연 오류</b><br>✅ 조치: 600V 시스템 전원 차단 및 절연 값 점검 (수리 필요)", en: "⚠️ <b>Error: Battery isolation error</b><br>✅ Action: Insulation value too low. Shutdown. Check insulation/damage." },
+        "530": { ko: "⚠️ <b>오류: BTMS 1 600VDC 공급 전압 부족</b><br>✅ 조치: 전원 공급 장치 점검 및 매뉴얼 참조", en: "⚠️ <b>Error: BTMS 1 600VDC supply undervoltage</b><br>✅ Action: Undervoltage on 600V output. Check power supply." },
+        "531": { ko: "⚠️ <b>오류: BTMS 1 600VDC 공급 전압 과다</b><br>✅ 조치: 전원 공급 장치 점검 및 매뉴얼 참조", en: "⚠️ <b>Error: BTMS 1 600VDC supply overvoltage</b><br>✅ Action: Overvoltage on 600V supply. Check power supply." },
+        "532": { ko: "⚠️ <b>오류: BTMS 1 24VDC 공급 전압 부족</b><br>✅ 조치: 전원 공급 장치 점검 및 매뉴얼 참조", en: "⚠️ <b>Error: BTMS 1 24VDC supply undervoltage</b><br>✅ Action: Undervoltage on 24V supply. Check power supply." },
+        "533": { ko: "⚠️ <b>오류: BTMS 1 24VDC 공급 전압 과다</b><br>✅ 조치: 전원 공급 장치 점검 및 매뉴얼 참조", en: "⚠️ <b>Error: BTMS 1 24VDC supply overvoltage</b><br>✅ Action: Overvoltage on 24V supply. Check power supply." },
+        "534": { ko: "⚠️ <b>오류: BTMS 1 컴프레서 오류</b><br>✅ 조치: 전원 및 모듈 점검, AGV 재시작", en: "⚠️ <b>Error: BTMS 1 compressor error</b><br>✅ Action: Fault with compressor. Check power supply/module." },
+        "535": { ko: "⚠️ <b>오류: BTMS 1 워터 펌프 오류</b><br>✅ 조치: 전원 및 모듈 점검, 매뉴얼 참조", en: "⚠️ <b>Error: BTMS 1 water pump error</b><br>✅ Action: Error with water pump. Check power supply/module." },
+        "536": { ko: "⚠️ <b>오류: BTMS 1 냉각 시스템 압력 오류</b><br>✅ 조치: 가스 압력 점검 및 보정", en: "⚠️ <b>Error: BTMS 1 cooling system pressure error</b><br>✅ Action: Unwanted pressure on cooling system. Check gas pressure." },
+        "537": { ko: "⚠️ <b>오류: BTMS 1 제상 센서 오류</b><br>✅ 조치: 전원 및 모듈 점검, AGV 재시작", en: "⚠️ <b>Error: BTMS 1 sensor defrost error</b><br>✅ Action: Fault on defrost sensor. Check power supply/module." },
+        "538": { ko: "⚠️ <b>오류: BTMS 1 CAN 통신 오류</b><br>✅ 조치: CAN 버스 및 모듈 점검", en: "⚠️ <b>Error: BTMS 1 CAN communication error</b><br>✅ Action: No CAN report from BMS. Check CAN bus/wiring." },
+        "539": { ko: "⚠️ <b>오류: BTMS 1 냉각수 출구 온도 센서 오류</b><br>✅ 조치: 전원 및 모듈 점검", en: "⚠️ <b>Error: BTMS 1 sensor temperature outgoing coolant error</b><br>✅ Action: Error on outgoing coolant temp sensor. Check power/module." },
+        "540": { ko: "⚠️ <b>오류: BTMS 1 냉각수 입구 온도 센서 오류</b><br>✅ 조치: 전원 및 모듈 점검, AGV 재시작", en: "⚠️ <b>Error: BTMS 1 sensor temperature incoming coolant error</b><br>✅ Action: Error on incoming coolant temp sensor. Check power/module." },
+        "541": { ko: "⚠️ <b>오류: BTMS 1 냉각수 수위 낮음</b><br>✅ 조치: 냉각수 보충", en: "⚠️ <b>Error: BTMS 1 coolant level low</b><br>✅ Action: Low coolant level. Top up tank." },
+        "542": { ko: "⚠️ <b>오류: BTMS 1 PTC 또는 히터 오류</b><br>✅ 조치: 전원 및 모듈 점검", en: "⚠️ <b>Error: BTMS 1 PTC or heater error</b><br>✅ Action: Abnormal function of PTC/heater. Check power/module." },
+        "543": { ko: "⚠️ <b>오류: BTMS 1 팬 오류</b><br>✅ 조치: 전원 및 모듈 점검", en: "⚠️ <b>Error: BTMS 1 fan error</b><br>✅ Action: Fault with fan. Check power supply/module." },
+        "544": { ko: "⚠️ <b>오류: BTMS 1 릴레이 접착 오류</b><br>✅ 조치: 전원 및 모듈 점검", en: "⚠️ <b>Error: BTMS 1 relay bonding error</b><br>✅ Action: Fault with closing power supply relay. Check power/module." },
+        "545": { ko: "⚠️ <b>오류: BTMS 1 PTC CAN 통신 오류</b><br>✅ 조치: 전원 및 모듈 점검", en: "⚠️ <b>Error: BTMS 1 PTC CAN communication error</b><br>✅ Action: Communication fault with PTC unit. Check power/module." },
+        "546": { ko: "⚠️ <b>오류: BTMS 1 CMP CAN 통신 오류</b><br>✅ 조치: 전원 및 모듈 점검", en: "⚠️ <b>Error: BTMS 1 CMP CAN communication error</b><br>✅ Action: Communication fault with compressor unit. Check power/module." },
+        "547": { ko: "⚠️ <b>오류: BTMS 1 동결 보호 동작</b><br>✅ 조치: 냉각수 온도 확인", en: "⚠️ <b>Error: BTMS 1 freezing protection</b><br>✅ Action: Low coolant temperature. Check coolant temperature." },
+        "548": { ko: "⚠️ <b>오류: BTMS 1 배기 온도 센서 오류</b><br>✅ 조치: 냉각수 온도, 수위, 순환 상태 점검", en: "⚠️ <b>Error: BTMS 1 sensor temperature exhaust error</b><br>✅ Action: Exhaust temp too high. Check cooling water/circulation." },
+        "549": { ko: "⚠️ <b>오류: BTMS 1 배기 온도 보호 동작</b><br>✅ 조치: 냉각수 점검 및 AGV 재시작 (시스템 셧다운됨)", en: "⚠️ <b>Error: BTMS 1 exhaust temperature protection</b><br>✅ Action: Outlet temp protected. System shut down. Check cooling." },
+        "550": { ko: "⚠️ <b>오류: 퓨즈 FC00 (HMI 및 스위치) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC00 HMI and ethernet switch NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "551": { ko: "⚠️ <b>오류: 퓨즈 FC10 (VCU 비상 정지 입력) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC10 inputs VCU emergency stop buttons NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "552": { ko: "⚠️ <b>오류: 퓨즈 FC12 (원격 모듈 2) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC12 remote IO module 2 NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "553": { ko: "⚠️ <b>오류: 퓨즈 FC13 (인버터 온도 센서) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC13 inverters coolant temperature sensor NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "554": { ko: "⚠️ <b>오류: 퓨즈 FC14 (유압 시스템 I/O) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC14 hydraulic system IO NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "555": { ko: "⚠️ <b>오류: 퓨즈 FC15 (스위치/버튼 입력) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC15 inputs switches and buttons NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "556": { ko: "⚠️ <b>오류: 퓨즈 FC16 (HMI 비상 정지/도어) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC16 inputs HMI emergency stop buttons and door sensors NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "557": { ko: "⚠️ <b>오류: 퓨즈 FC17 (원격 모듈 3) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC17 remote IO module 3 NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "558": { ko: "⚠️ <b>오류: 퓨즈 FC18 (원격 모듈 4) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC18 remote IO module 4 NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "559": { ko: "⚠️ <b>오류: 퓨즈 FC19 (MCD 수신기/입력) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC19 MCD receiver and MCD PLC and inputs MCD NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "560": { ko: "⚠️ <b>오류: 퓨즈 FC20 (장애물 감지 센서) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC20 obstacle detection sensors NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "561": { ko: "⚠️ <b>오류: 퓨즈 FC21 (모뎀) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC21 modem NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "562": { ko: "⚠️ <b>오류: 퓨즈 FC22 (조향 엔코더) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC22 steering angle encoders NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "563": { ko: "⚠️ <b>오류: 퓨즈 FC23 (내비게이션 컨트롤러) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC23 navigation controller NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "564": { ko: "⚠️ <b>오류: 퓨즈 FC24 (원격 모듈 5) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC24 remote IO module 5 NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "565": { ko: "⚠️ <b>오류: 퓨즈 FC25 (원격 모듈 6) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC25 remote IO module 6 NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "566": { ko: "⚠️ <b>오류: 퓨즈 FC11 (원격 모듈 1) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC11 remote IO module 1 NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "567": { ko: "⚠️ <b>오류: 퓨즈 FC41 (E-캐비닛 히팅) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC41 e-cabinet heating NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "568": { ko: "⚠️ <b>오류: 퓨즈 FC42 (장애물 센서 히팅) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC42 obstacle detection sensors heating NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "570": { ko: "⚠️ <b>오류: 퓨즈 FC44 (그리스 윤활 시스템) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC44 grease lubrication system NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "571": { ko: "⚠️ <b>오류: 퓨즈 FC45 (트랜스폰더 안테나) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC45 transponder antennas NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "572": { ko: "⚠️ <b>오류: 퓨즈 FC46 (E-캐비닛 온도조절기) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC46 e-cabinet thermostat NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "575": { ko: "⚠️ <b>오류: 퓨즈 FC49 (E-캐비닛 조명) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC49 lighting e-cabinet NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "576": { ko: "⚠️ <b>오류: 퓨즈 FC50 (E-캐비닛 전원 소켓) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC50 power socket e-cabinet NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "577": { ko: "⚠️ <b>오류: 퓨즈 FC51 (예비) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC51 spare NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "578": { ko: "⚠️ <b>오류: 퓨즈 FC504 (24V 발전기/인버터) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC504 24VDC generator and traction inverters NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "579": { ko: "⚠️ <b>오류: 퓨즈 FC505 (24V 펌프/유압) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC505 24VDC traction cooling pomp and hydraulic system pump NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "590": { ko: "⚠️ <b>오류: 퓨즈 FC702 (주행 냉각 팬 1) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC702 traction cooling fan 1 NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "591": { ko: "⚠️ <b>오류: 퓨즈 FC703 (주행 냉각 팬 2) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC703 traction cooling fan 2 NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "592": { ko: "⚠️ <b>오류: 퓨즈 FC02 (안전 PLC VB15) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC02 Safety PLC VB15 NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "593": { ko: "⚠️ <b>오류: 퓨즈 FC03 (안전 PLC VB0) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC03 Safety PLC VB0 NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "594": { ko: "⚠️ <b>오류: 퓨즈 FC04 (안전 PLC VB0) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC04 Safety PLC VB0 NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "596": { ko: "⚠️ <b>오류: 퓨즈 FC05 (안전 PLC VB1) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC05 Safety PLC VB1 NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "597": { ko: "⚠️ <b>오류: 퓨즈 FC06 (안전 PLC VB2) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC06 Safety PLC VB2 NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "598": { ko: "⚠️ <b>오류: 퓨즈 FC07 (안전 PLC VB3) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC07 Safety PLC VB3 NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "599": { ko: "⚠️ <b>오류: 퓨즈 FC08 (안전 PLC VB4) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC08 Safety PLC VB4 NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "600": { ko: "⚠️ <b>오류: 퓨즈 FC09 (안전 PLC VB5) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC09 Safety PLC VB5 NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "601": { ko: "⚠️ <b>오류: 퓨즈 FC40 (유압 오일 냉각 팬) 단선</b><br>✅ 조치: 배선, 퓨즈 및 연결된 시스템 점검", en: "⚠️ <b>Error: Fuse FC40 hydraulic oil cooling fan NOK</b><br>✅ Action: Fuse inactive. Check wiring/system/fuse." },
+        "619": { ko: "⚠️ <b>오류: AGV-QCC 플러그 감지 신호 타임아웃</b><br>✅ 조치: 소켓/플러그 손상 확인 및 센서 장착 점검", en: "⚠️ <b>Error: AGV QCC PP signal timeout</b><br>✅ Action: Plug present signal not detected. Check QCC socket/plug/sensor." },
+        "620": { ko: "⚠️ <b>오류: 주행 중 QCC 소켓 내 물체 감지</b><br>✅ 조치: QCC 소켓 내부 확인 및 센서 조정", en: "⚠️ <b>Error: AGV object detected in QCC charging socket while driving</b><br>✅ Action: Object detected in QCC socket. Check socket/sensor." },
+        "621": { ko: "⚠️ <b>오류: 컨택터 KF101 (600V+ QCC) 피드백 오류</b><br>✅ 조치: VCU 배선 및 시스템 손상 점검", en: "⚠️ <b>Error: Contactor KF101 600VDC+ QCC charging feedback error</b><br>✅ Action: Feedback error QCC+. Check wiring/system." },
+        "622": { ko: "⚠️ <b>오류: 컨택터 KF102 (600V+ CCS) 피드백 오류</b><br>✅ 조치: VCU 배선 및 시스템 손상 점검", en: "⚠️ <b>Error: Contactor KF102 600VDC+ CCS charging feedback error</b><br>✅ Action: Feedback error CCS+. Check wiring/system." },
+        "623": { ko: "⚠️ <b>오류: 컨택터 KF103 (600V- QCC) 피드백 오류</b><br>✅ 조치: VCU 배선 및 시스템 손상 점검", en: "⚠️ <b>Error: Contactor KF103 600VDC- QCC charging feedback error</b><br>✅ Action: Feedback error QCC-. Check wiring/system." },
+        "624": { ko: "⚠️ <b>오류: 컨택터 KF104 (600V- CCS) 피드백 오류</b><br>✅ 조치: VCU 배선 및 시스템 손상 점검", en: "⚠️ <b>Error: Contactor KF104 600VDC- CCS charging feedback error</b><br>✅ Action: Feedback error CCS-. Check wiring/system." },
+        "625": { ko: "⚠️ <b>오류: 컨택터 KF101 VCU 출력 오류</b><br>✅ 조치: VCU 배선 및 시스템 손상 점검", en: "⚠️ <b>Error: Contactor KF101 600VDC+ QCC charging VCU output error</b><br>✅ Action: VCU output error QCC+. Check wiring/system." },
+        "626": { ko: "⚠️ <b>오류: 컨택터 KF102 VCU 출력 오류</b><br>✅ 조치: VCU 배선 및 시스템 손상 점검", en: "⚠️ <b>Error: Contactor KF102 600VDC+ CCS charging VCU output error</b><br>✅ Action: VCU output error CCS+. Check wiring/system." },
+        "627": { ko: "⚠️ <b>오류: 컨택터 KF103 VCU 출력 오류</b><br>✅ 조치: VCU 배선 및 시스템 손상 점검", en: "⚠️ <b>Error: Contactor KF103 600VDC- QCC charging VCU output error</b><br>✅ Action: VCU output error QCC-. Check wiring/system." },
+        "628": { ko: "⚠️ <b>오류: 컨택터 KF104 VCU 출력 오류</b><br>✅ 조치: VCU 배선 및 시스템 손상 점검", en: "⚠️ <b>Error: Contactor KF104 600VDC- CCS charging VCU output error</b><br>✅ Action: VCU output error CCS-. Check wiring/system." },
+        "629": { ko: "⚠️ <b>오류: 충전기 충전 중단됨</b><br>✅ 조치: 충전 시스템 오류 확인", en: "⚠️ <b>Error: Charger interrupted charging</b><br>✅ Action: Charger stopped unexpectedly. Check charging system." },
+        "630": { ko: "⚠️ <b>오류: 충전기 상태 오류</b><br>✅ 조치: 충전 시스템 오류 확인", en: "⚠️ <b>Error: Charger state error</b><br>✅ Action: Charger in error state. Check charging system." },
+        "631": { ko: "⚠️ <b>오류: 충전기 셧다운</b><br>✅ 조치: 충전 시스템 오류 확인", en: "⚠️ <b>Error: Charger charging shutdown</b><br>✅ Action: Charger requests termination. Check charging system." },
+        "632": { ko: "⚠️ <b>오류: 충전기 비상 정지</b><br>✅ 조치: 비상 정지 원인 확인 및 안전 확보 후 리셋", en: "⚠️ <b>Error: Charger emergency stop</b><br>✅ Action: Charger emergency stop active. Check reason." },
+        "634": { ko: "⚠️ <b>오류: 충전 전 주행 시스템 비활성화 안 됨</b><br>✅ 조치: AGV 리셋 및 주행 시스템 오류 확인", en: "⚠️ <b>Error: AGV movement not deactivated before charging</b><br>✅ Action: Traction not deactivated. Reset AGV/check traction." },
+        "635": { ko: "⚠️ <b>오류: VCCU(충전제어) 잘못된 상태 전이</b><br>✅ 조치: AGV 리셋 및 CAN 통신/모듈 점검", en: "⚠️ <b>Error: VCCU to state initialize from invalid state</b><br>✅ Action: Invalid state transition. Reset AGV/Check CAN." },
+        "636": { ko: "⚠️ <b>오류: 충전 플러그 온도 너무 높음</b><br>✅ 조치: 플러그 냉각 및 손상 여부 확인", en: "⚠️ <b>Error: Charger plug temperature too high</b><br>✅ Action: Plug temp too high. Cool down/check plug." },
+        "638": { ko: "⚠️ <b>오류: 충전 중 모드 스위치 변경됨</b><br>✅ 조치: 스위치 위치 확인 및 AGV 리셋", en: "⚠️ <b>Error: AGV mode selector switch changed during charging</b><br>✅ Action: Mode switch changed during charging. Check switch/reset." },
+        "639": { ko: "⚠️ <b>오류: VCCU 상태 오류</b><br>✅ 조치: CAN 버스 및 모듈 기능 점검", en: "⚠️ <b>Error: VCCU state error</b><br>✅ Action: Charge controller error. Check CAN/wiring." },
+        "640": { ko: "⚠️ <b>오류: QCC 충전 중 CCS 플러그 감지됨</b><br>✅ 조치: CCS 플러그 제거 및 커버 장착, 충전 재시작", en: "⚠️ <b>Error: AGV detected CCS plug while QCC charging</b><br>✅ Action: CCS plug detected during QCC. Remove CCS plug." },
+        "641": { ko: "⚠️ <b>오류: CCS 플러그 잠금 해제 타임아웃</b><br>✅ 조치: 배선 및 모듈 기능 점검", en: "⚠️ <b>Error: AGV CCS plug unlocking timeout</b><br>✅ Action: Failed to unlock CCS plug. Check wiring/module." },
+        "642": { ko: "⚠️ <b>오류: CCS 플러그 잠금 타임아웃</b><br>✅ 조치: 배선 및 모듈 기능 점검", en: "⚠️ <b>Error: AGV CCS plug locking timeout</b><br>✅ Action: Failed to lock CCS plug. Check wiring/module." },
+        "643": { ko: "⚠️ <b>오류: CCS 플러그 잠금 장치 오류</b><br>✅ 조치: 배선 및 모듈 기능 점검", en: "⚠️ <b>Error: AGV CCS plug locking error</b><br>✅ Action: Lock plug motor error. Check wiring/module." },
+        "644": { ko: "⚠️ <b>오류: 충전 중 KF101 상태 변경됨</b><br>✅ 조치: 컨택터 손상/기능 및 배선 점검 (심각한 문제 가능성)", en: "⚠️ <b>Error: Contactor KF101 600VDC+ QCC charging state changed during charging</b><br>✅ Action: KF101 state changed. Check contactor/wiring." },
+        "645": { ko: "⚠️ <b>오류: 충전 중 KF102 상태 변경됨</b><br>✅ 조치: 컨택터 손상/기능 및 배선 점검 (심각한 문제 가능성)", en: "⚠️ <b>Error: Contactor KF102 600VDC+ CCS charging state changed during charging</b><br>✅ Action: KF102 state changed. Check contactor/wiring." },
+        "646": { ko: "⚠️ <b>오류: 충전 중 KF103 상태 변경됨</b><br>✅ 조치: 컨택터 손상/기능 및 배선 점검 (심각한 문제 가능성)", en: "⚠️ <b>Error: Contactor KF103 600VDC- QCC charging state changed during charging</b><br>✅ Action: KF103 state changed. Check contactor/wiring." },
+        "647": { ko: "⚠️ <b>오류: 충전 중 KF104 상태 변경됨</b><br>✅ 조치: 컨택터 손상/기능 및 배선 점검 (심각한 문제 가능성)", en: "⚠️ <b>Error: Contactor KF104 600VDC- CCS charging state changed during charging</b><br>✅ Action: KF104 state changed. Check contactor/wiring." },
+        "648": { ko: "⚠️ <b>오류: DC-DC 전원 공급 피드백 오류</b><br>✅ 조치: 전원 공급 장치 점검 및 교체", en: "⚠️ <b>Error: Power supply DC-DC feedback error</b><br>✅ Action: 24V DC-DC OK signal inactive. Check power supplies." },
+        "649": { ko: "⚠️ <b>오류: 치명적 오류로 인한 충전 중단</b><br>✅ 조치: 오류 원인 분석 및 다른 알람 확인", en: "⚠️ <b>Error: AGV charging stopped due to error</b><br>✅ Action: Charging stopped due to critical error. Analyse cause." },
+        "650": { ko: "⚠️ <b>오류: 배터리 스트링 불균형</b><br>✅ 조치: 작업 완료 후 충전기로 이동 (자동 밸런싱 실패 시 수동 수행)", en: "⚠️ <b>Error: Battery string unbalance</b><br>✅ Action: Imbalance between strings. Send to charger for balancing." }
+    };
+
+    function setLang(lang) {
+        currentLang = lang;
+        document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById('btn-' + lang).classList.add('active');
+        document.getElementById('title').innerText = uiText[lang].title;
+        document.getElementById('search-text').innerText = uiText[lang].search;
+        document.getElementById('errorCode').placeholder = uiText[lang].placeholder;
+        document.getElementById('footer-text').innerText = uiText[lang].footer;
+        
+        const codeValue = document.getElementById('errorCode').value;
+        if (codeValue) {
+            check();
+        } else {
+            const resultDiv = document.getElementById('result');
+            if(resultDiv.innerText.includes("💡") || resultDiv.innerText.includes("❌")) {
+                resultDiv.innerText = uiText[lang].empty;
+            }
+        }
+    }
+
+    function getNumbers(count, end) {
+        let nums = [];
+        while (nums.length < count) {
+            let r = Math.floor(Math.random() * end) + 1;
+            if (!nums.includes(r)) nums.push(r);
+        }
+        return nums.sort((a, b) => a - b);
+    }
+
+    function getBallColor(num) {
+        if (num <= 10) return "#ffd600"; 
+        if (num <= 20) return "#00a3ff"; 
+        if (num <= 30) return "#ff3838"; 
+        if (num <= 40) return "#9e9e9e"; 
+        return "#4cd137"; 
+    }
+
+    function makeBall(num, isStar = false) {
+        const color = isStar ? "#FFD700" : getBallColor(num);
+        const textColor = (isStar || (!isStar && num <= 10)) ? "#333" : "white";
+        return `<span class="lotto-ball" style="background:${color}; color:${textColor};">${num}</span>`;
+    }
+
+    function check() {
+        const codeInput = document.getElementById('errorCode');
+        const code = codeInput.value;
+        const resultDiv = document.getElementById('result');
+        
+        if (!code) { resultDiv.innerText = uiText[currentLang].empty; return; }
+
+        if (code === "777") {
+            let output = uiText[currentLang].lottoTitle;
+            
+            for (let i = 0; i < 5; i++) {
+                output += `<div class="lotto-row">`;
+                
+                if (currentLang === 'ko') {
+                    const nums = getNumbers(6, 45);
+                    nums.forEach(n => output += makeBall(n));
+                } else {
+                    const mainNums = getNumbers(5, 50);
+                    const starNums = getNumbers(2, 12);
+                    mainNums.forEach(n => output += makeBall(n));
+                    output += `<span class="plus-sign">+</span>`;
+                    starNums.forEach(n => output += makeBall(n, true));
+                }
+                output += `</div>`;
+            }
+            resultDiv.innerHTML = output;
+
+        } else if (agvData[code]) {
+                        let text = agvData[code][currentLang];
+            let styledText = text.replace("✅", "<br><br>✅"); 
+            resultDiv.innerHTML = styledText;
+
+        } else {
+            resultDiv.innerText = uiText[currentLang].unknown;
+        }
+    }
+</script>
+</body>
+
+</html>
