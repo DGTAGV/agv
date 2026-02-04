@@ -575,6 +575,9 @@
 
     function check() {
         const codeInput = document.getElementById('errorCode');
+
+     codeInput.blur();
+     
         const code = codeInput.value;
         const resultDiv = document.getElementById('result');
         
@@ -613,3 +616,4 @@
 </body>
 
 </html>
+
