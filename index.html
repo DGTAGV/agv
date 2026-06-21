@@ -1,26 +1,23 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AGV CHEAT SHEET</title>
- <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="icon.png">
     <style>
-      
     :root { 
-        --primary: #00b894; --secondary: #f39c12; --success: #2ecc71; 
-        --bg: #f0f2f5; --card-bg: white; --text-color: #333; --border: #eee; --result-bg: #fafafa;
+        --primary: #3b82f6; /* 세련된 블루 포인트 */
+        --secondary: #60a5fa; 
+        --success: #10b981; 
+        --bg: #020617; /* 완전 다크한 배경 */
+        --card-bg: #0f172a; /* 다크 블루 톤의 카드 배경 */
+        --text-color: #f8fafc; /* 밝은 회백색 텍스트 */
+        --border: #1e293b; /* 은은한 테두리 */
+        --result-bg: #1e293b; /* 결과창 배경 */
     }
 
-    
-    @media (prefers-color-scheme: dark) {
-        :root {
-            --bg: #1a1a1a; --card-bg: #2d2d2d; --text-color: #f0f0f0; --border: #444; --result-bg: #383838;
-        }
-    }
-
-   
     html, body { height: 100%; margin: 0; padding: 0; }
     
     body { 
@@ -32,33 +29,64 @@
         transition: 0.3s; 
     }
     
-
     .app-card { 
         width: 100%; 
         max-width: 480px; 
         min-height: 100vh; 
         background: var(--card-bg); 
-        box-shadow: 0 0 20px rgba(0,0,0,0.1); 
+        box-shadow: 0 0 30px rgba(0,0,0,0.5); 
         overflow-y: auto; 
-        display: flex;       
+        display: flex;        
         flex-direction: column; 
         border-radius: 0; 
         transition: 0.3s; 
     }
     
-    .header { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); color: white; padding: 40px 20px 30px; position: relative; flex-shrink: 0; }
+    .header { 
+        background: linear-gradient(135deg, #020617 0%, #1e293b 100%); 
+        color: white; 
+        padding: 40px 20px 30px; 
+        position: relative; 
+        flex-shrink: 0; 
+        border-bottom: 1px solid var(--border);
+    }
     
     .lang-switch { position: absolute; top: 15px; right: 15px; display: flex; gap: 5px; }
-    .lang-btn { border: 1px solid rgba(255,255,255,0.5); background: rgba(255,255,255,0.2); color: white; padding: 5px 10px; border-radius: 15px; font-size: 0.8rem; cursor: pointer; backdrop-filter: blur(5px); transition: 0.3s; }
-    .lang-btn.active { background: white; color: #00b894; border: none; font-weight: bold; }
+    .lang-btn { 
+        border: 1px solid rgba(255,255,255,0.2); 
+        background: rgba(255,255,255,0.1); 
+        color: #94a3b8; 
+        padding: 5px 10px; 
+        border-radius: 15px; 
+        font-size: 0.8rem; 
+        cursor: pointer; 
+        backdrop-filter: blur(5px); 
+        transition: 0.3s; 
+    }
+    .lang-btn.active { 
+        background: var(--primary); 
+        color: white; 
+        border: none; 
+        font-weight: bold; 
+        box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+    }
 
-    
     .content { padding: 30px 20px; flex: 1; display: flex; flex-direction: column; }
     
     .input-group { position: relative; margin-bottom: 20px; }
-    input { width: 100%; padding: 15px 20px; border: 2px solid var(--border); border-radius: 15px; font-size: 1.1rem; box-sizing: border-box; outline: none; transition: 0.3s; background: var(--card-bg); color: var(--text-color); }
-    input:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(0, 184, 148, 0.2); }
-    
+    input { 
+        width: 100%; 
+        padding: 15px 20px; 
+        border: 2px solid var(--border); 
+        border-radius: 15px; 
+        font-size: 1.1rem; 
+        box-sizing: border-box; 
+        outline: none; 
+        transition: 0.3s; 
+        background: #020617; 
+        color: white; 
+    }
+    input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(59, 130, 246, 0.3); }
     
     .ad-banner {
         width: 100%;
@@ -69,23 +97,22 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: #999;
+        color: #64748b;
         font-size: 0.9rem;
-        border: 2px dashed #ccc; 
+        border: 2px dashed #334155; 
     }
-
 
     .search-btn { 
         width: 100%; 
         padding: 25px 0; 
-        background: linear-gradient(to bottom, #2ecc71, #1e8449); 
+        background: linear-gradient(to bottom, #3b82f6, #1d4ed8); 
         color: white; 
         border: none; 
         border-radius: 15px; 
         font-size: 1.5rem; 
         font-weight: 900; 
         cursor: pointer; 
-        box-shadow: 0 8px 0 #145a32, 0 15px 20px rgba(0,0,0,0.2); 
+        box-shadow: 0 8px 0 #1e3a8a, 0 15px 20px rgba(0,0,0,0.4); 
         transition: all 0.1s; 
         margin-bottom: 10px;
         position: relative;
@@ -94,27 +121,49 @@
     }
     .search-btn:active { 
         top: 8px; 
-        box-shadow: 0 0 0 #145a32, inset 0 2px 5px rgba(0,0,0,0.2); 
+        box-shadow: 0 0 0 #1e3a8a, inset 0 2px 5px rgba(0,0,0,0.5); 
     }
     
-    #result { margin-top: 25px; padding: 20px; border-radius: 15px; background: var(--result-bg); border-left: 5px solid var(--primary); min-height: 80px; text-align: left; line-height: 1.6; font-size: 1rem; animation: fadeIn 0.5s ease; color: var(--text-color); }
+    #result { 
+        margin-top: 25px; 
+        padding: 20px; 
+        border-radius: 15px; 
+        background: var(--result-bg); 
+        border-left: 5px solid var(--primary); 
+        min-height: 80px; 
+        text-align: left; 
+        line-height: 1.6; 
+        font-size: 1rem; 
+        animation: fadeIn 0.5s ease; 
+        color: var(--text-color); 
+        box-shadow: inset 0 2px 10px rgba(0,0,0,0.2);
+    }
     
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-    .footer { padding: 30px 20px; font-size: 0.85rem; color: #888; border-top: 1px solid var(--border); text-align: center; margin-top: auto; flex-shrink: 0; }
+    .footer { 
+        padding: 30px 20px; 
+        font-size: 0.85rem; 
+        color: #64748b; 
+        border-top: 1px solid var(--border); 
+        text-align: center; 
+        margin-top: auto; 
+        flex-shrink: 0; 
+    }
     .footer a { color: var(--primary); text-decoration: none; font-weight: bold; margin-top: 5px; display: inline-block; }
     
     .lotto-row { 
         margin-bottom: 5px; 
-        padding: 5px;      
-        background: var(--card-bg); 
+        padding: 5px;       
+        background: #020617; 
         border-radius: 8px; 
-        box-shadow: 0 1px 2px rgba(0,0,0,0.1); 
+        box-shadow: 0 2px 5px rgba(0,0,0,0.3); 
         display: flex; 
         align-items: center; 
         justify-content: center; 
         flex-wrap: wrap; 
         gap: 3px; 
+        border: 1px solid var(--border);
     }
     
     .lotto-ball { 
@@ -122,12 +171,12 @@
         border-radius: 50%; 
         display: inline-flex; justify-content: center; align-items: center; 
         color: white; font-weight: bold; font-size: 1.2rem; 
-        text-shadow: 1px 1px 1px rgba(0,0,0,0.5); 
-        box-shadow: inset 3px 3px 5px rgba(255,255,255,0.4), inset -3px -3px 5px rgba(0,0,0,0.3), 1px 1px 2px rgba(0,0,0,0.2);
-        border: 1px solid rgba(0,0,0,0.1); 
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.8); 
+        box-shadow: inset 2px 2px 5px rgba(255,255,255,0.2), inset -3px -3px 5px rgba(0,0,0,0.5), 1px 1px 3px rgba(0,0,0,0.5);
+        border: 1px solid rgba(0,0,0,0.3); 
     }
     
-    .plus-sign { font-weight: bold; color: #999; margin: 0 2px; font-size: 1rem; }
+    .plus-sign { font-weight: bold; color: #64748b; margin: 0 2px; font-size: 1rem; }
     </style>
 </head>
 <body>
@@ -138,8 +187,8 @@
             <button id="btn-ko" class="lang-btn active" onclick="setLang('ko')">🇰🇷 KO</button>
             <button id="btn-en" class="lang-btn" onclick="setLang('en')">🇺🇸 EN</button>
         </div>
-        <h2 id="title" style="margin:0; font-size: 1.5rem;">AGV 알람 코드 조회</h2>
-        <p id="subtitle" style="margin:5px 0 0; opacity: 0.8; font-size: 0.9rem;">Smart Port Maintenance Assistant</p>
+        <h2 id="title" style="margin:0; font-size: 1.5rem; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">AGV 알람 코드 조회</h2>
+        <p id="subtitle" style="margin:5px 0 0; opacity: 0.7; font-size: 0.9rem;">Smart Port Maintenance Assistant</p>
     </div>
 
 <div class="content">
@@ -152,7 +201,7 @@
             <script>
                 new PartnersCoupang.G({"id":962819,"template":"carousel","trackingCode":"AF5272609","width":"360","height":"80","tsource":""});
             </script>
-            <p style="margin-top: 5px; font-size: 10px; color: #dcdcdc; text-align: center;">쿠팡 파트너스 활동 수수료를 제공받음</p>
+            <p style="margin-top: 5px; font-size: 10px; color: #475569; text-align: center;">쿠팡 파트너스 활동 수수료를 제공받음</p>
         </div>
 
         <button class="search-btn" onclick="check()" id="search-text">조회하기</button>
@@ -567,15 +616,15 @@
 
     function getBallColor(num) {
         if (num <= 10) return "#ffd600"; 
-        if (num <= 20) return "#00a3ff"; 
-        if (num <= 30) return "#ff3838"; 
-        if (num <= 40) return "#9e9e9e"; 
-        return "#4cd137"; 
+        if (num <= 20) return "#3b82f6"; 
+        if (num <= 30) return "#ef4444"; 
+        if (num <= 40) return "#64748b"; 
+        return "#10b981"; 
     }
 
     function makeBall(num, isStar = false) {
-        const color = isStar ? "#FFD700" : getBallColor(num);
-        const textColor = (isStar || (!isStar && num <= 10)) ? "#333" : "white";
+        const color = isStar ? "#f59e0b" : getBallColor(num);
+        const textColor = (isStar || (!isStar && num <= 10)) ? "#1e293b" : "white";
         return `<span class="lotto-ball" style="background:${color}; color:${textColor};">${num}</span>`;
     }
 
@@ -620,10 +669,4 @@
     }
 </script>
 </body>
-
 </html>
-
-
-
-
-
